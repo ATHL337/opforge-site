@@ -17,6 +17,10 @@ params:
   homeInfoParams:
     Title: "Welcome to OPFORGE"
     Content: "A cyber operations lab focused on threat detection, adversary emulation, and explainable AI."
+  images: ["/preview.png"]        # Used for Open Graph/Twitter
+  cover:
+    link: "/preview.png"          # Optional for blog posts too
+  env: production
 
 menu:
   main:
