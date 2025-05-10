@@ -1,6 +1,290 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Welcome to OPFORGE on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Welcome to OPFORGE on OPFORGE</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>What is OPFORGE? OPFORGE stands for Offensive Posture + FORensics + Generation &amp;amp; Engineering. It&amp;rsquo;s a purpose-built cybersecurity lab environment designed to:
-🛠️ Emulate adversary behavior 🔍 Ingest and enrich telemetry from Windows and Linux endpoints 🧠 Apply explainable AI to triage and surface detections 📚 Document real-world operator workflows Whether you&amp;rsquo;re reverse-engineering a malware sample, developing YARA rules, or building detection pipelines with SOF-ELK, OPFORGE is designed to mirror the complexity and realism of mission-ready cyber defense.</description></item><item><title>Building the OPFORGE Website</title><link>https://opforge.dev/posts/site-setup/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/site-setup/</guid><description>This post documents the process of building the official website for OPFORGE, a cybersecurity lab project focused on detection engineering, threat emulation, and explainable AI.
-🔧 Tooling Stack Hugo – Static site generator (v0.147.1) PaperMod – Lightweight, responsive Hugo theme GitHub Pages – CI/CD-backed static hosting Cloudflare DNS – Domain and HTTPS management Custom Domain – https://opforge.dev 🧱 Build Process Created site: hugo new site opforge-site --format yaml Installed theme: git submodule add https://github.</description></item><item><title>Exporting Winlogbeat Logs to SOF-ELK</title><link>https://opforge.dev/docs/winlogbeat-export/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/winlogbeat-export/</guid><description>🔍 Purpose Enable structured Windows event logs to flow from OPFORGE&amp;rsquo;s Windows Member VM to SOF-ELK using Winlogbeat, a JSON exporter, and PowerShell automation.
-✅ Prerequisites Windows 10/11 host joined to domain (e.g., OPF-MBR01) Winlogbeat installed and configured SSH access to SOF-ELK (e.g., elk_user@192.168.77.40) Valid PuTTY key pair (.ppk) for SCP transfers (if using PSCP) Target folder on SOF-ELK writable by elk_user (e.g., /logstash/kape/) 🔧 Check–Do–Check Workflow 🔍 Check Confirm Winlogbeat is writing .</description></item><item><title>OPFORGE Status Overview</title><link>https://opforge.dev/docs/status/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/status/</guid><description>🧭 Project Status: OPFORGE This page tracks the current progress of OPFORGE—covering infrastructure setup, log ingestion, threat emulation, and explainable detection pipelines.
-✅ Foundation &amp;amp; Deployment Area Status Notes Domain Purchased ✅ opforge.dev via Cloudflare Hugo Static Site Created ✅ With PaperMod theme GitHub Repo Initialized ✅ opforge-site GitHub Actions CI/CD ✅ Deploys on push to main GitHub Pages Configured ✅ Using gh-pages branch Custom Domain Mapped ✅ Site live at https://opforge.</description></item><item><title>SOF-ELK Setup &amp; Ingestion</title><link>https://opforge.dev/docs/sof-elk/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/sof-elk/</guid><description>🔍 Purpose Deploy and configure the SOF-ELK stack for ingestion of structured JSON logs from Winlogbeat and other sources inside the OPFORGE lab.
-✅ Prerequisites VMware Workstation Pro VM: OPF-LOG01 Latest SOF-ELK Ubuntu-based image deployed Static IP assignment (e.g., 192.168.77.40) Inbound SSH/SCP and port 5044 (Beats input) allowed JSON-formatted Winlogbeat files structured for ingest 🔧 Check–Do–Check Workflow 🔍 Check Confirm network interface and IP: ip a ip route ping -c 3 8.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Welcome to OPFORGE on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Welcome to OPFORGE on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;h2 id="what-is-opforge">What is OPFORGE?&lt;/h2>
+&lt;p>&lt;strong>OPFORGE&lt;/strong> stands for &lt;strong>Offensive Posture + FORensics + Generation &amp;amp; Engineering&lt;/strong>. It&amp;rsquo;s a purpose-built cybersecurity lab environment designed to:&lt;/p>
+&lt;ul>
+&lt;li>🛠️ Emulate adversary behavior&lt;/li>
+&lt;li>🔍 Ingest and enrich telemetry from Windows and Linux endpoints&lt;/li>
+&lt;li>🧠 Apply explainable AI to triage and surface detections&lt;/li>
+&lt;li>📚 Document real-world operator workflows&lt;/li>
+&lt;/ul>
+&lt;p>Whether you&amp;rsquo;re reverse-engineering a malware sample, developing YARA rules, or building detection pipelines with SOF-ELK, OPFORGE is designed to mirror the complexity and realism of mission-ready cyber defense.&lt;/p></description></item><item><title>Building the OPFORGE Website</title><link>https://opforge.dev/posts/site-setup/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/site-setup/</guid><description>&lt;p>This post documents the process of building the official website for &lt;strong>OPFORGE&lt;/strong>, a cybersecurity lab project focused on detection engineering, threat emulation, and explainable AI.&lt;/p>
+&lt;h2 id="-tooling-stack">🔧 Tooling Stack&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Hugo&lt;/strong> – Static site generator (v0.147.1)&lt;/li>
+&lt;li>&lt;strong>PaperMod&lt;/strong> – Lightweight, responsive Hugo theme&lt;/li>
+&lt;li>&lt;strong>GitHub Pages&lt;/strong> – CI/CD-backed static hosting&lt;/li>
+&lt;li>&lt;strong>Cloudflare DNS&lt;/strong> – Domain and HTTPS management&lt;/li>
+&lt;li>&lt;strong>Custom Domain&lt;/strong> – &lt;code>https://opforge.dev&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-build-process">🧱 Build Process&lt;/h2>
+&lt;ol>
+&lt;li>Created site:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> hugo new site opforge-site --format yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Installed theme:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>
+&lt;p>Configured &lt;code>hugo.yaml&lt;/code> with menus, theme, and metadata&lt;/p></description></item><item><title>Exporting Winlogbeat Logs to SOF-ELK</title><link>https://opforge.dev/docs/winlogbeat-export/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/winlogbeat-export/</guid><description>&lt;h2 id="-purpose">🔍 Purpose&lt;/h2>
+&lt;p>Enable structured Windows event logs to flow from OPFORGE&amp;rsquo;s Windows Member VM to SOF-ELK using Winlogbeat, a JSON exporter, and PowerShell automation.&lt;/p>
+&lt;hr>
+&lt;h2 id="-prerequisites">✅ Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>Windows 10/11 host joined to domain (e.g., &lt;code>OPF-MBR01&lt;/code>)&lt;/li>
+&lt;li>Winlogbeat installed and configured&lt;/li>
+&lt;li>SSH access to SOF-ELK (e.g., &lt;code>elk_user@192.168.77.40&lt;/code>)&lt;/li>
+&lt;li>Valid PuTTY key pair (&lt;code>.ppk&lt;/code>) for SCP transfers (if using PSCP)&lt;/li>
+&lt;li>Target folder on SOF-ELK writable by &lt;code>elk_user&lt;/code> (e.g., &lt;code>/logstash/kape/&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-checkdocheck-workflow">🔧 Check–Do–Check Workflow&lt;/h2>
+&lt;h3 id="-check">🔍 Check&lt;/h3>
+&lt;ul>
+&lt;li>Confirm Winlogbeat is writing &lt;code>.ndjson&lt;/code> files locally:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Get-ChildItem -Path &lt;span style="color:#e6db74">&amp;#39;C:\ProgramData\winlogbeat\opforge-export&amp;#39;&lt;/span> -Filter *.ndjson
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="-do">✅ Do&lt;/h3>
+&lt;h4 id="1-configure-winlogbeat-to-output-json">1. Configure Winlogbeat to output JSON&lt;/h4>
+&lt;p>Edit &lt;code>winlogbeat.yml&lt;/code>:&lt;/p></description></item><item><title>OPFORGE Status Overview</title><link>https://opforge.dev/docs/status/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/status/</guid><description>&lt;h1 id="-project-status-opforge">🧭 Project Status: OPFORGE&lt;/h1>
+&lt;p>This page tracks the current progress of OPFORGE—covering infrastructure setup, log ingestion, threat emulation, and explainable detection pipelines.&lt;/p>
+&lt;hr>
+&lt;h2 id="-foundation--deployment">✅ Foundation &amp;amp; Deployment&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Area&lt;/th>
+&lt;th>Status&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Domain Purchased&lt;/td>
+&lt;td>✅ &lt;code>opforge.dev&lt;/code> via Cloudflare&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Hugo Static Site Created&lt;/td>
+&lt;td>✅ With PaperMod theme&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GitHub Repo Initialized&lt;/td>
+&lt;td>✅ &lt;a href="https://github.com/ATHL337/opforge-site">opforge-site&lt;/a>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GitHub Actions CI/CD&lt;/td>
+&lt;td>✅ Deploys on push to &lt;code>main&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GitHub Pages Configured&lt;/td>
+&lt;td>✅ Using &lt;code>gh-pages&lt;/code> branch&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Custom Domain Mapped&lt;/td>
+&lt;td>✅ Site live at &lt;code>https://opforge.dev&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>.gitignore&lt;/code> Configured&lt;/td>
+&lt;td>✅ Excludes &lt;code>public/&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Hugo baseURL Configured&lt;/td>
+&lt;td>✅ Matches live domain&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>About Page&lt;/td>
+&lt;td>✅ /about/ scaffolded&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Blog Setup&lt;/td>
+&lt;td>✅ Blog post created to document site build&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Docs Landing Page&lt;/td>
+&lt;td>✅ /docs/ structured with Check–Do–Check flow&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-infrastructure--ingestion">🧱 Infrastructure + Ingestion&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Component&lt;/th>
+&lt;th>Status&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Windows Server (DC01)&lt;/td>
+&lt;td>✅ Configured with static IP&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Member Windows Host&lt;/td>
+&lt;td>✅ Logs exported via Winlogbeat&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Winlogbeat JSON Workflow&lt;/td>
+&lt;td>✅ SCP + filter/enrich to SOF-ELK&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SOF-ELK Ingestion (Ubuntu)&lt;/td>
+&lt;td>✅ New version deployed&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Kibana + Index Visibility&lt;/td>
+&lt;td>✅ Verified working&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Custom Index Definitions&lt;/td>
+&lt;td>⚠️ Partially done, needs tuning&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-threat-emulation--detection-engineering">⚔️ Threat Emulation &amp;amp; Detection Engineering&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Task&lt;/th>
+&lt;th>Status&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Atomic Red Team Setup&lt;/td>
+&lt;td>⬜ Not started&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Emulate TTPs&lt;/td>
+&lt;td>⬜ Planned&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Detection Validation in ELK&lt;/td>
+&lt;td>⬜ Planned&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ATT&amp;amp;CK Mapping (Log Tagging)&lt;/td>
+&lt;td>⬜ Planned&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-aiml--triage">🧠 AI/ML &amp;amp; Triage&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Task&lt;/th>
+&lt;th>Status&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Feature Engineering from Logs&lt;/td>
+&lt;td>⬜ Not started&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ML Model Training/Triage Layer&lt;/td>
+&lt;td>⬜ Not started&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Explainability (e.g. SHAP, LIME)&lt;/td>
+&lt;td>⬜ Not started&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-docs-blog-and-content">✍️ Docs, Blog, and Content&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Page/Post&lt;/th>
+&lt;th>Status&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>site-setup.md&lt;/code>&lt;/td>
+&lt;td>✅ Published&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>/docs/&lt;/code> index&lt;/td>
+&lt;td>✅ Scaffolded&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>/about.md&lt;/code>&lt;/td>
+&lt;td>✅ Done&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>status.md&lt;/code>&lt;/td>
+&lt;td>✅ This page&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Check–Do–Check Templates&lt;/td>
+&lt;td>⬜ Planned&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;p>Stay tuned for updates as OPFORGE evolves into a full-spectrum cyber detection and AI engineering lab.&lt;/p></description></item><item><title>SOF-ELK Setup &amp; Ingestion</title><link>https://opforge.dev/docs/sof-elk/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/sof-elk/</guid><description>&lt;h2 id="-purpose">🔍 Purpose&lt;/h2>
+&lt;p>Deploy and configure the SOF-ELK stack for ingestion of structured JSON logs from Winlogbeat and other sources inside the OPFORGE lab.&lt;/p>
+&lt;hr>
+&lt;h2 id="-prerequisites">✅ Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>VMware Workstation Pro VM: &lt;code>OPF-LOG01&lt;/code>&lt;/li>
+&lt;li>Latest SOF-ELK Ubuntu-based image deployed&lt;/li>
+&lt;li>Static IP assignment (e.g., &lt;code>192.168.77.40&lt;/code>)&lt;/li>
+&lt;li>Inbound SSH/SCP and port 5044 (Beats input) allowed&lt;/li>
+&lt;li>JSON-formatted Winlogbeat files structured for ingest&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-checkdocheck-workflow">🔧 Check–Do–Check Workflow&lt;/h2>
+&lt;h3 id="-check">🔍 Check&lt;/h3>
+&lt;ul>
+&lt;li>Confirm network interface and IP:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ip a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ip route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ping -c &lt;span style="color:#ae81ff">3&lt;/span> 8.8.8.8
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Confirm Logstash is running:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo systemctl status logstash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="-do">✅ Do&lt;/h3>
+&lt;h4 id="1-assign-static-ip-with-netplan">1. Assign Static IP with Netplan&lt;/h4>
+&lt;p>File: &lt;code>/etc/netplan/01-netcfg.yaml&lt;/code>&lt;/p></description></item></channel></rss>

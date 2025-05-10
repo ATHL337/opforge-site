@@ -1,2 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Project Log on OPFORGE</title><link>https://opforge.dev/posts/</link><description>Recent content in Project Log on OPFORGE</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Building the OPFORGE Website</title><link>https://opforge.dev/posts/site-setup/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/site-setup/</guid><description>This post documents the process of building the official website for OPFORGE, a cybersecurity lab project focused on detection engineering, threat emulation, and explainable AI.
-🔧 Tooling Stack Hugo – Static site generator (v0.147.1) PaperMod – Lightweight, responsive Hugo theme GitHub Pages – CI/CD-backed static hosting Cloudflare DNS – Domain and HTTPS management Custom Domain – https://opforge.dev 🧱 Build Process Created site: hugo new site opforge-site --format yaml Installed theme: git submodule add https://github.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Project Log on OPFORGE</title><link>https://opforge.dev/posts/</link><description>Recent content in Project Log on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Building the OPFORGE Website</title><link>https://opforge.dev/posts/site-setup/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/site-setup/</guid><description>&lt;p>This post documents the process of building the official website for &lt;strong>OPFORGE&lt;/strong>, a cybersecurity lab project focused on detection engineering, threat emulation, and explainable AI.&lt;/p>
+&lt;h2 id="-tooling-stack">🔧 Tooling Stack&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Hugo&lt;/strong> – Static site generator (v0.147.1)&lt;/li>
+&lt;li>&lt;strong>PaperMod&lt;/strong> – Lightweight, responsive Hugo theme&lt;/li>
+&lt;li>&lt;strong>GitHub Pages&lt;/strong> – CI/CD-backed static hosting&lt;/li>
+&lt;li>&lt;strong>Cloudflare DNS&lt;/strong> – Domain and HTTPS management&lt;/li>
+&lt;li>&lt;strong>Custom Domain&lt;/strong> – &lt;code>https://opforge.dev&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-build-process">🧱 Build Process&lt;/h2>
+&lt;ol>
+&lt;li>Created site:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> hugo new site opforge-site --format yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>Installed theme:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>
+&lt;p>Configured &lt;code>hugo.yaml&lt;/code> with menus, theme, and metadata&lt;/p></description></item></channel></rss>
