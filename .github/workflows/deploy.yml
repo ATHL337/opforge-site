@@ -6,16 +6,17 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: write  # Required for GH Pages deploy
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source with submodules
-	uses: actions/checkout@v4
-	with:
-	  submodules: true
+        uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Setup Hugo (extended)
         uses: peaceiris/actions-hugo@v2
