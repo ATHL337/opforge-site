@@ -1,0 +1,33 @@
+baseURL: "https://opforge.dev/"
+languageCode: "en-us"
+title: "OPFORGE"
+theme: ["PaperMod"]
+pagination:
+  pagerSize: 10
+
+params:
+  author: "Alfredo Pelaez"
+  description: "OPFORGE is a cyber lab project for detection engineering, threat emulation, and explainable AI."
+  ShowReadingTime: true
+  ShowCodeCopyButtons: true
+  ShowShareButtons: true
+  defaultTheme: auto
+  disableThemeToggle: false
+
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 1
+    - name: Blog
+      url: /posts/
+      weight: 2
+    - name: Docs
+      url: /docs/
+      weight: 3
+    - name: About
+      url: /about/
+      weight: 4
+    - name: GitHub
+      url: "https://github.com/ATHL337/opforge-site"
+      weight: 5
