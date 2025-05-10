@@ -6,6 +6,7 @@ pagination:
   pagerSize: 10
 
 params:
+  mainSections: ["posts"]
   author: "Alfredo Pelaez"
   description: "OPFORGE is a cyber lab project for detection engineering, threat emulation, and explainable AI."
   ShowReadingTime: true
