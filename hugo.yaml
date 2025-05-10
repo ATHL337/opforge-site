@@ -1,34 +1,44 @@
 baseURL: "https://opforge.dev/"
-languageCode: "en-us"
 title: "OPFORGE"
 theme: ["PaperMod"]
-pagination:
-  pagerSize: 10
+languageCode: "en-us"
+defaultContentLanguage: "en"
 
 params:
-  mainSections: ["posts"]
+  description: "Detection Engineering and Threat Emulation Lab"
   author: "Alfredo Pelaez"
-  description: "OPFORGE is a cyber lab project for detection engineering, threat emulation, and explainable AI."
+  mainSections: ["posts"]
   ShowReadingTime: true
-  ShowCodeCopyButtons: true
+  ShowPostNavLinks: true
   ShowShareButtons: true
-  defaultTheme: auto
-  disableThemeToggle: false
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: true
+  homeInfoParams:
+    Title: "Welcome to OPFORGE"
+    Content: "A cyber operations lab focused on threat detection, adversary emulation, and explainable AI."
 
 menu:
   main:
-    - name: Home
-      url: /
+    - name: "Home"
+      url: "/"
       weight: 1
-    - name: Blog
-      url: /posts/
+    - name: "Docs"
+      url: "/docs/"
       weight: 2
-    - name: Docs
-      url: /docs/
+    - name: "Posts"
+      url: "/posts/"
       weight: 3
-    - name: About
-      url: /about/
+    - name: "About"
+      url: "/about/"
       weight: 4
-    - name: GitHub
-      url: "https://github.com/ATHL337/opforge-site"
-      weight: 5
+
+enableRobotsTXT: true
+disableKinds: ["taxonomy", "term"]
+
+outputs:
+  home: ["HTML", "RSS", "JSON"]
+  section: ["HTML", "RSS"]
+  page: ["HTML"]
+  taxonomy: ["HTML"]
+  term: ["HTML"]
