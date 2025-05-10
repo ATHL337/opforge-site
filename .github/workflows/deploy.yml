@@ -6,12 +6,11 @@ on:
       - main
 
 permissions:
-  contents: write  # Required for GH Pages deploy
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source with submodules
         uses: actions/checkout@v4
