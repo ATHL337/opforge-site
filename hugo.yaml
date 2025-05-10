@@ -21,6 +21,8 @@ params:
   cover:
     link: "/preview.png"          # Optional for blog posts too
   env: production
+  assets:
+  favicon: "/favicon.png"
 
 menu:
   main:
