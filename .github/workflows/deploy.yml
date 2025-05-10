@@ -22,8 +22,8 @@ jobs:
           hugo-version: '0.112.5'
           extended: true
 
-      - name: Build Hugo site
-        run: hugo --minify
+      - name: Build with Hugo
+        run: hugo --minify --cleanDestinationDir
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
