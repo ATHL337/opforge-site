@@ -287,4 +287,71 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>
-&lt;p>Configured &lt;code>hugo.yaml&lt;/code> with menus, theme, and metadata&lt;/p></description></item><item><title>Forging the Core: Building OPFORGE's Domain Controller</title><link>https://opforge.dev/posts/opf-dc01-domain-controller/</link><pubDate>Tue, 06 May 2025 09:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opf-dc01-domain-controller/</guid><description>In this post, we configure OPFORGE&amp;rsquo;s foundational infrastructure by building the domain controller &lt;code>opf-dc01&lt;/code>. We&amp;rsquo;ll define our network structure, stand up Active Directory, and prepare the environment for workstation and log server integration.</description></item><item><title>OPFORGE Overview</title><link>https://opforge.dev/posts/opforge-overview/</link><pubDate>Sun, 04 May 2025 08:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge-overview/</guid><description>Introducing the OPFORGE project—a purpose-built cyber operations lab focused on threat emulation, detection engineering, and explainable AI.</description></item></channel></rss>
+&lt;p>Configured &lt;code>hugo.yaml&lt;/code> with menus, theme, and metadata&lt;/p></description></item><item><title>Windows VM Setup for OPFORGE</title><link>https://opforge.dev/docs/windows-setup/</link><pubDate>Tue, 06 May 2025 19:00:00 -0500</pubDate><guid>https://opforge.dev/docs/windows-setup/</guid><description>&lt;p>This guide walks through the creation of the Windows VMs used in OPFORGE, including the Domain Controller (&lt;code>opf-dc01&lt;/code>) and the Member Workstation (&lt;code>opf-mbr01&lt;/code>), using VMware Workstation Pro.&lt;/p>
+&lt;hr>
+&lt;h2 id="-prerequisites">🛠️ Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>VMware Workstation Pro (or Player)&lt;/li>
+&lt;li>Windows Server 2019 ISO&lt;/li>
+&lt;li>Windows 10/11 ISO&lt;/li>
+&lt;li>Sufficient RAM (8–16 GB minimum)&lt;/li>
+&lt;li>Disk space: At least 100GB free&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-vm-folder-structure">📁 VM Folder Structure&lt;/h2>
+&lt;p>Organize your lab directory:&lt;/p>
+&lt;pre tabindex="0">&lt;code>OPFORGE-VMs/
+├── opf-dc01/
+└── opf-mbr01/
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h2 id="-vm-1-domain-controller-opf-dc01">🧱 VM 1: Domain Controller (&lt;code>opf-dc01&lt;/code>)&lt;/h2>
+&lt;ol>
+&lt;li>Create a new VM from the Windows Server 2019 ISO.&lt;/li>
+&lt;li>Configure:
+&lt;ul>
+&lt;li>&lt;strong>RAM&lt;/strong>: 4096 MB&lt;/li>
+&lt;li>&lt;strong>Processors&lt;/strong>: 2&lt;/li>
+&lt;li>&lt;strong>NIC&lt;/strong>: NAT or Custom VMnet (e.g., &lt;code>VMnet2&lt;/code>)&lt;/li>
+&lt;li>&lt;strong>Disk&lt;/strong>: 60 GB (preallocated optional)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Install Windows and set hostname: &lt;code>opf-dc01&lt;/code>&lt;/li>
+&lt;li>Set static IP (e.g., &lt;code>192.168.77.10&lt;/code>)&lt;/li>
+&lt;li>Rename Ethernet to &lt;code>LAN&lt;/code> (optional)&lt;/li>
+&lt;li>Promote to Domain Controller:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Install-ADDSForest -DomainName &lt;span style="color:#e6db74">&amp;#34;opforge.local&amp;#34;&lt;/span> -InstallDNS -Force
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-vm-2-member-workstation-opf-mbr01">🖥️ VM 2: Member Workstation (&lt;code>opf-mbr01&lt;/code>)&lt;/h2>
+&lt;ol>
+&lt;li>Create a new VM from the Windows 10 or 11 ISO.&lt;/li>
+&lt;li>Configure:
+&lt;ul>
+&lt;li>&lt;strong>RAM&lt;/strong>: 4096 MB&lt;/li>
+&lt;li>&lt;strong>Processors&lt;/strong>: 2&lt;/li>
+&lt;li>&lt;strong>NIC&lt;/strong>: Same network as &lt;code>opf-dc01&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Disk&lt;/strong>: 60 GB&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Install Windows and set hostname: &lt;code>opf-mbr01&lt;/code>&lt;/li>
+&lt;li>Set static IP (e.g., &lt;code>192.168.77.20&lt;/code>) with DNS pointing to &lt;code>opf-dc01&lt;/code>&lt;/li>
+&lt;li>Join the domain:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Add-Computer -DomainName opforge.local -Restart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-check">🔍 Check&lt;/h2>
+&lt;ul>
+&lt;li>Both VMs should ping each other&lt;/li>
+&lt;li>Domain join successful&lt;/li>
+&lt;li>Static IP and DNS validated via &lt;code>ipconfig /all&lt;/code>&lt;/li>
+&lt;li>Snapshots created after each critical stage&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-related-pages">🔗 Related Pages&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://opforge.dev/posts/opf-dc01-domain-controller/">opf-dc01 Domain Setup&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://opforge.dev/posts/winlogbeat-export-opf-mbr01/">Winlogbeat Export&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Forging the Core: Building OPFORGE's Domain Controller</title><link>https://opforge.dev/posts/opf-dc01-domain-controller/</link><pubDate>Tue, 06 May 2025 09:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opf-dc01-domain-controller/</guid><description>In this post, we configure OPFORGE&amp;rsquo;s foundational infrastructure by building the domain controller &lt;code>opf-dc01&lt;/code>. We&amp;rsquo;ll define our network structure, stand up Active Directory, and prepare the environment for workstation and log server integration.</description></item><item><title>OPFORGE Overview</title><link>https://opforge.dev/posts/opforge-overview/</link><pubDate>Sun, 04 May 2025 08:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge-overview/</guid><description>Introducing the OPFORGE project—a purpose-built cyber operations lab focused on threat emulation, detection engineering, and explainable AI.</description></item></channel></rss>
