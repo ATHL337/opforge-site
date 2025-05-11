@@ -1,6 +1,6 @@
 ---
 title: "From Host to Hive: Transferring Logs with PowerShell + SCP"
-date: 2025-05-10
+date: 2025-05-09T14:00:00-05:00
 draft: false
 tags: ["powershell", "automation", "scp", "winlogbeat"]
 summary: "This post describes how to automate the conversion and transfer of Winlogbeat logs from `opf-mbr01` to `opf-log01` using PowerShell and SCP."
