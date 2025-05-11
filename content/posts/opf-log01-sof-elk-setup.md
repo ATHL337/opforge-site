@@ -1,6 +1,6 @@
 ---
 title: "Ingest to Analyze: Bringing SOF-ELK Online"
-date: 2025-05-10
+date: 2025-05-07T10:00:00-05:00
 draft: false
 tags: ["elk stack", "sof-elk", "logstash", "kibana", "linux"]
 summary: "This post walks through the deployment and configuration of `opf-log01`, the centralized logging VM for OPFORGE, powered by SOF-ELK. From network setup to confirming ELK stack services, this guide ensures a solid foundation for ingesting security-relevant data."

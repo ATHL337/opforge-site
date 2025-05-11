@@ -1,6 +1,6 @@
 ---
 title: "Precision Logging: Exporting Winlogbeat Data from OPFORGE"
-date: 2025-05-10
+date: 2025-05-08T11:30:00-05:00
 draft: false
 tags: ["winlogbeat", "windows logs", "ingestion", "filebeat", "SOF-ELK"]
 summary: "We configure Winlogbeat on `opf-mbr01` to export JSON-formatted logs to disk. This allows enriched post-processing before ingesting into SOF-ELK."

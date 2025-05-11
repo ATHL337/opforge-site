@@ -1,6 +1,6 @@
 ---
 title: "Forging the Core: Building OPFORGE's Domain Controller"
-date: 2025-05-10T10:00:00-05:00
+date: 2025-05-06T09:00:00-05:00
 draft: false
 tags: ["active directory", "windows server", "domain controller", "ad ds"]
 summary: "In this post, we configure OPFORGE's foundational infrastructure by building the domain controller `opf-dc01`. We'll define our network structure, stand up Active Directory, and prepare the environment for workstation and log server integration."
