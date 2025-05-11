@@ -32,7 +32,7 @@ foreach ($path in $pathsToAdd) {
 Write-Host "`n[STAGED FILES]"
 $staged = git diff --cached --name-only
 if (-not $staged) {
-    Write-Host "⚠️  Nothing is staged to commit." -ForegroundColor Yellow
+    Write-Host "`n⚠️  Nothing is staged to commit." -ForegroundColor Yellow
     exit 1
 } else {
     $staged
@@ -43,7 +43,7 @@ $confirmation = Read-Host "`nProceed with commit and push? (y/n)"
 if ($confirmation -eq 'y') {
     git commit -m $Message
     git push
-    Write-Host "`n✅ Changes pushed. GitHub Actions will deploy your Hugo site." -ForegroundColor Green
+    Write-Host "`n✅Changes pushed. GitHub Actions will deploy your Hugo site." -ForegroundColor Green
 } else {
     Write-Host "`n❌ Commit aborted by user." -ForegroundColor Yellow
 }
