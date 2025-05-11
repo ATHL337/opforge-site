@@ -1,6 +1,6 @@
 ---
 title: "OPFORGE Overview"
-date: 2025-05-09T14:00:00-05:00
+date: 2025-05-04T08:00:00-05:00
 draft: false
 tags: [overview, opforge, lab-setup, project]
 summary: "Introducing the OPFORGE project—a purpose-built cyber operations lab focused on threat emulation, detection engineering, and explainable AI."

@@ -1,6 +1,6 @@
 ---
 title: "Building the OPFORGE Website"
-date: 2025-05-04T08:00:00-05:00
+date: 2025-05-07T08:00:00-05:00
 tags: ["opforge", "hugo", "github-pages", "devlog"]
 categories: ["Project Log"]
 draft: false
