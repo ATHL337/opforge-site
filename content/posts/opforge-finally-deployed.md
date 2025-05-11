@@ -1,7 +1,7 @@
 ---
 
 title: "From 404 to Flawless: How OPFORGE Finally Deployed"
-date: 2025-05-10T22:30:00-05:00
+date: 2025-05-10T21:15:00-05:00
 slug: "opforge-finally-deployed"
 tags: \["deployment", "hugo", "github-pages", "papermod", "troubleshooting"]
 draft: false

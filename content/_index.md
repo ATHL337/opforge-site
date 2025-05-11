@@ -4,12 +4,12 @@ date: 2025-05-10
 draft: false
 ---
 
-Welcome to **OPFORGE** — a living cyber operations lab focused on:
+Welcome to **OPFORGE** — a living cyber operations lab built to explore and advance:
 
 - 🧠 Threat-informed detection engineering
 - ⚔️ Adversary emulation using MITRE ATT&CK
 - 🤖 Triage with explainable AI & machine learning
-- 📚 Public documentation for reproducibility
+- 📚 Public documentation for transparency and reproducibility
 
 ---
 
@@ -29,7 +29,5 @@ Welcome to **OPFORGE** — a living cyber operations lab focused on:
 - [Site Setup with Hugo + GitHub Pages](/posts/site-setup/)
 
 ---
-
-Built and maintained by [Alfredo Pelaez](https://hackerdemic.com) — Flight Chief, Cyber Warfare Operator, lifelong learner.
 
 > **Mission:** Equip defenders with realistic, explainable, and scalable tools to understand and act against cyber threats.

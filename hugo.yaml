@@ -17,12 +17,14 @@ params:
   homeInfoParams:
     Title: "Welcome to OPFORGE"
     Content: "A cyber operations lab focused on threat detection, adversary emulation, and explainable AI."
-  images: ["/preview.png"]        # Used for Open Graph/Twitter
+  images: ["/preview.png"]
   cover:
-    link: "/preview.png"          # Optional for blog posts too
+    link: "/preview.png"
   env: production
   assets:
-  favicon: "/favicon.png"
+    favicon: "/favicon.png"
+  footer:
+    customText: "Built and maintained by Alfredo Pelaez — Cybersecurity Leader focused on Threat Detection, Adversary Emulation, and Applied Research."
 
 menu:
   main:

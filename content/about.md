@@ -35,7 +35,7 @@ Whether you're reverse-engineering a malware sample, developing YARA rules, or b
 
 ## Who's Behind It?
 
-OPFORGE is developed and maintained by [Alfredo Pelaez](https://hackerdemic.com), a senior enlisted cyber warfare operator and lifelong learner focused on the intersection of threat detection and machine learning.
+OPFORGE is developed and maintained by [Alfredo Pelaez](https://hackerdemic.com), a cybersecurity leader focused on threat detection, adversary emulation, and applied research. His work blends operational experience with a strong foundation in machine learning and cyber defense strategy to build meaningful, mission-ready solutions.
 
 ---
 
