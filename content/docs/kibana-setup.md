@@ -1,7 +1,7 @@
 
 ---
 title: "Kibana Data View Setup"
-date: 2025-05-11T15:00:00-05:00
+date: 2025-05-10T21:15:00-05:00
 draft: false
 summary: "This guide walks through setting up a custom Kibana data view for visualizing Winlogbeat and Sysmon data in OPFORGE."
 tags: ["kibana", "elk stack", "visualization", "winlogbeat", "sysmon"]
