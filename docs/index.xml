@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sat, 10 May 2025 21:15:00 -0500</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Kibana Data View Setup</title><link>https://opforge.dev/docs/kibana-setup/</link><pubDate>Sat, 10 May 2025 21:15:00 -0500</pubDate><guid>https://opforge.dev/docs/kibana-setup/</guid><description>This guide walks through setting up a custom Kibana data view for visualizing Winlogbeat and Sysmon data in OPFORGE.</description></item><item><title>Exporting Winlogbeat Logs to SOF-ELK</title><link>https://opforge.dev/docs/winlogbeat-export/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/winlogbeat-export/</guid><description>&lt;h2 id="-purpose">🔍 Purpose&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sun, 11 May 2025 09:00:00 -0500</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Hardened GPO Configuration for OPFORGE</title><link>https://opforge.dev/docs/hardened-gpo-configuration/</link><pubDate>Sun, 11 May 2025 09:00:00 -0500</pubDate><guid>https://opforge.dev/docs/hardened-gpo-configuration/</guid><description>&lt;p>This document outlines the hardened Group Policy Object (GPO) configuration applied to &lt;code>opf-dc01.opforge.local&lt;/code> within the &lt;code>opforge.local&lt;/code> Active Directory domain. This GPO includes best-practice security settings tailored to the OPFORGE environment.&lt;/p>
+&lt;hr>
+&lt;h2 id="-gpo-overview">📁 GPO Overview&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>GPO Name&lt;/strong>: Hardened Windows Baseline&lt;/li>
+&lt;li>&lt;strong>GPO GUID&lt;/strong>: &lt;code>{5972D448-D77A-41DA-9820-E7F28FE7AFAE}&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Linked To&lt;/strong>: Domain - &lt;code>opforge.local&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Enforced&lt;/strong>: No&lt;/li>
+&lt;li>&lt;strong>Security Filtering&lt;/strong>: Authenticated Users&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-security-settings">🔐 Security Settings&lt;/h2>
+&lt;p>These settings are managed via the Security Configuration Editor (&lt;code>SecEdit\GptTmpl.inf&lt;/code>):&lt;/p>
+&lt;h3 id="account-lockout-policy">Account Lockout Policy&lt;/h3>
+&lt;ul>
+&lt;li>Lockout threshold: 5 invalid attempts&lt;/li>
+&lt;li>Lockout duration: 15 minutes&lt;/li>
+&lt;li>Reset count after: 15 minutes&lt;/li>
+&lt;/ul>
+&lt;h3 id="password-policy">Password Policy&lt;/h3>
+&lt;ul>
+&lt;li>Enforce password history: 24 passwords remembered&lt;/li>
+&lt;li>Maximum password age: 60 days&lt;/li>
+&lt;li>Minimum password length: 14 characters&lt;/li>
+&lt;li>Complexity requirements: Enabled&lt;/li>
+&lt;/ul>
+&lt;h3 id="audit-policy">Audit Policy&lt;/h3>
+&lt;p>Located in &lt;code>Audit\audit.csv&lt;/code>:&lt;/p></description></item><item><title>Kibana Data View Setup</title><link>https://opforge.dev/docs/kibana-setup/</link><pubDate>Sat, 10 May 2025 21:15:00 -0500</pubDate><guid>https://opforge.dev/docs/kibana-setup/</guid><description>This guide walks through setting up a custom Kibana data view for visualizing Winlogbeat and Sysmon data in OPFORGE.</description></item><item><title>Exporting Winlogbeat Logs to SOF-ELK</title><link>https://opforge.dev/docs/winlogbeat-export/</link><pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/winlogbeat-export/</guid><description>&lt;h2 id="-purpose">🔍 Purpose&lt;/h2>
 &lt;p>Enable structured Windows event logs to flow from OPFORGE&amp;rsquo;s Windows Member VM to SOF-ELK using Winlogbeat, a JSON exporter, and PowerShell automation.&lt;/p>
 &lt;hr>
 &lt;h2 id="-prerequisites">✅ Prerequisites&lt;/h2>
