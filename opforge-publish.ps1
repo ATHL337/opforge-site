@@ -9,12 +9,12 @@ Write-Host "`n[BUILDING] Running Hugo build..."
 hugo --cleanDestinationDir --minify
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] Hugo build failed. Resolve issues and try again." -ForegroundColor Red
+    Write-Host "`n[ERROR] Hugo build failed. Resolve issues and try again." -ForegroundColor Red
     exit 1
 }
 
 # Step 2: Show current status
-Write-Host "[GIT STATUS]"
+Write-Host "`n[GIT STATUS]"
 git status
 
 # Step 3: Dynamically add only existing folders
@@ -29,21 +29,21 @@ foreach ($path in $pathsToAdd) {
 }
 
 # Step 4: Show staged files
-Write-Host "[STAGED FILES]"
+Write-Host "`n[STAGED FILES]"
 $staged = git diff --cached --name-only
 if (-not $staged) {
-    Write-Host "Nothing is staged to commit." -ForegroundColor Yellow
+    Write-Host "`n Nothing is staged to commit." -ForegroundColor Yellow
     exit 1
 } else {
     $staged
 }
 
 # Step 5: Confirm and commit
-$confirmation = Read-Host "Proceed with commit and push? (y/n)"
+$confirmation = Read-Host "`nProceed with commit and push? (y/n)"
 if ($confirmation -eq 'y') {
     git commit -m $Message
     git push
-    Write-Host "Changes pushed. GitHub Actions will deploy your Hugo site." -ForegroundColor Green
+    Write-Host "`n Changes pushed. GitHub Actions will deploy your Hugo site." -ForegroundColor Green
 } else {
-    Write-Host "Commit aborted by user." -ForegroundColor Yellow
+    Write-Host "`n Commit aborted by user." -ForegroundColor Yellow
 }
