@@ -94,31 +94,41 @@
 &lt;li>Legacy OS images break modern tools&lt;/li>
 &lt;li>Cloning base templates improves consistency&lt;/li>
 &lt;li>Network segmentation is essential for realistic detection engineering&lt;/li>
-&lt;/ul></description></item><item><title>OPFORGE Base Templates</title><link>https://opforge.dev/docs/opf-template-notes/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-template-notes/</guid><description>&lt;h1 id="opforge-base-templates">OPFORGE Base Templates&lt;/h1>
-&lt;h2 id="base-ubuntu-2204-template">base-ubuntu-2204-template&lt;/h2>
+&lt;/ul></description></item><item><title>OPFORGE Base Template Notes</title><link>https://opforge.dev/posts/opf-template-notes/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opf-template-notes/</guid><description>&lt;h2 id="-base-templates-used-in-opforge">🧱 Base Templates Used in OPFORGE&lt;/h2>
+&lt;p>This post outlines the two core VM templates used to clone all OPFORGE lab components. Each template is hardened, snapshot-ready, and optimized for its role.&lt;/p>
+&lt;hr>
+&lt;h3 id="-base-ubuntu-2204-template">🐧 &lt;code>base-ubuntu-2204-template&lt;/code>&lt;/h3>
 &lt;ul>
-&lt;li>OS: Ubuntu 22.04 LTS Minimal&lt;/li>
-&lt;li>Uses: Cloning source for &lt;code>opf-red01&lt;/code>, &lt;code>opf-log01&lt;/code>, &lt;code>opf-ai01&lt;/code>, &lt;code>opf-cloud01&lt;/code>&lt;/li>
-&lt;li>Hardened baseline with:
+&lt;li>&lt;strong>OS&lt;/strong>: Ubuntu 22.04 LTS (minimal ISO)&lt;/li>
+&lt;li>&lt;strong>Usage&lt;/strong>: Source image for all Linux-based OPFORGE components&lt;/li>
+&lt;li>&lt;strong>Configured With&lt;/strong>:
 &lt;ul>
-&lt;li>UFW firewall&lt;/li>
-&lt;li>SSH key-based auth&lt;/li>
-&lt;li>Git, Python, pip pre-installed&lt;/li>
+&lt;li>SSH key-based authentication&lt;/li>
+&lt;li>&lt;code>ufw&lt;/code> firewall rules&lt;/li>
+&lt;li>Preinstalled: Git, Python3, pip, htop, curl, net-tools&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Snapshot name: &lt;code>Clean Install – Ready for Clone&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Snapshot Label&lt;/strong>: &lt;code>ubuntu2204-clean-template&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h2 id="base-windows10-template">base-windows10-template&lt;/h2>
+&lt;h3 id="-base-windows10-template">🪟 &lt;code>base-windows10-template&lt;/code>&lt;/h3>
 &lt;ul>
-&lt;li>OS: Windows 10 Pro 22H2 (fully patched)&lt;/li>
-&lt;li>Uses: Cloning source for &lt;code>opf-mbr01&lt;/code>, future victims&lt;/li>
-&lt;li>Tools installed via Chocolatey:
+&lt;li>&lt;strong>OS&lt;/strong>: Windows 10 Pro 22H2 (fully patched)&lt;/li>
+&lt;li>&lt;strong>Usage&lt;/strong>: Source image for domain-joined endpoints&lt;/li>
+&lt;li>&lt;strong>Configured With&lt;/strong>:
 &lt;ul>
-&lt;li>Sysmon, Winlogbeat, VSCode, Wireshark, Sysinternals&lt;/li>
+&lt;li>Tools installed via &lt;code>Install-OPFORGE-WindowsTools.ps1&lt;/code>:
+&lt;ul>
+&lt;li>Sysmon, Winlogbeat, 7zip, VSCode, Sysinternals, Wireshark&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Pre-Sysprep and snapshot-ready&lt;/li>
-&lt;/ul></description></item><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
+&lt;li>Bloatware removal and telemetry disabled&lt;/li>
+&lt;li>Power settings and Start menu cleaned&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Snapshot Label&lt;/strong>: &lt;code>win10_22H2_tools_installed&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>Both templates are used to ensure consistency, repeatability, and portfolio-quality documentation across the OPFORGE environment.&lt;/p></description></item><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>OPFORGE began as a minimal cyber range with SOF-ELK and basic telemetry ingest, and has evolved into a segmented, multi-role portfolio lab for red team emulation, detection engineering, and AI-enhanced threat analysis.&lt;/p>
 &lt;h2 id="evolution-timeline">Evolution Timeline&lt;/h2>
@@ -191,48 +201,49 @@
 &lt;td>CSOCINFRA&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>OPFORGE VM CLone Map</title><link>https://opforge.dev/docs/opf-clone-map/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-clone-map/</guid><description>&lt;h1 id="opforge-vm-clone-map">OPFORGE VM Clone Map&lt;/h1>
+&lt;/table></description></item><item><title>OPFORGE VM Clone Map</title><link>https://opforge.dev/posts/opf-clone-map/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opf-clone-map/</guid><description>&lt;h2 id="-cloned-vms-in-the-opforge-lab">🔁 Cloned VMs in the OPFORGE Lab&lt;/h2>
+&lt;p>The following VMs are derived from the base templates and customized for their operational roles.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>Template&lt;/th>
-&lt;th>Clone Name&lt;/th>
-&lt;th>Purpose&lt;/th>
+&lt;th>Clone&lt;/th>
+&lt;th>Role Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-red01&lt;/td>
-&lt;td>Red Team operator box&lt;/td>
+&lt;td>&lt;code>opf-red01&lt;/code>&lt;/td>
+&lt;td>Red Team operator + C2 lab&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-log01&lt;/td>
-&lt;td>Log pipeline (Zeek, OpenSearch)&lt;/td>
+&lt;td>&lt;code>opf-log01&lt;/code>&lt;/td>
+&lt;td>Log ingestion + OpenSearch stack&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-ai01&lt;/td>
-&lt;td>Jupyter + anomaly detection&lt;/td>
+&lt;td>&lt;code>opf-ai01&lt;/code>&lt;/td>
+&lt;td>ML/AI detection modeling&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-cloud01&lt;/td>
-&lt;td>Targeted web app for attack&lt;/td>
+&lt;td>&lt;code>opf-cloud01&lt;/code>&lt;/td>
+&lt;td>Web app target in DMZRED&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>base-windows10-template&lt;/td>
-&lt;td>opf-mbr01&lt;/td>
-&lt;td>Domain-joined endpoint&lt;/td>
+&lt;td>&lt;code>opf-mbr01&lt;/code>&lt;/td>
+&lt;td>Domain-joined endpoint (Win10)&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h2 id="notes">Notes&lt;/h2>
+&lt;h2 id="-notes">🧠 Notes&lt;/h2>
 &lt;ul>
-&lt;li>All clones renamed post-creation&lt;/li>
-&lt;li>Hostname, IP, and NICs customized per segment&lt;/li>
-&lt;li>Clones are snapshot-friendly and scriptable&lt;/li>
+&lt;li>Hostnames and static IPs are applied per segment&lt;/li>
+&lt;li>Each VM is configured with dedicated virtual NICs&lt;/li>
+&lt;li>Cloning process preserves snapshot state and configuration integrity&lt;/li>
 &lt;/ul></description></item><item><title>Scaling OPFORGE: How I Clone and Manage Cyber Range VMs</title><link>https://opforge.dev/posts/2024-05-25-opforge-vm-cloning/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-vm-cloning/</guid><description>&lt;h2 id="clone-map">Clone Map&lt;/h2>
 &lt;table>
 &lt;thead>
@@ -275,4 +286,12 @@
 &lt;li>Clone from snapshot, then personalize (hostname, NIC, IP)&lt;/li>
 &lt;li>Use base templates with all dependencies pre-installed&lt;/li>
 &lt;li>Maintain consistency across VM builds using scripting and snapshots&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Windows 10 Template Setup for OPFORGE</title><link>https://opforge.dev/posts/windows-setup/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/windows-setup/</guid><description>&lt;p>This post documents the process of building and finalizing the &lt;strong>Windows 10 Pro 22H2&lt;/strong> template for use in the OPFORGE cyber lab environment.&lt;/p>
+&lt;h2 id="-version--baseline">🛠️ Version &amp;amp; Baseline&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>OS&lt;/strong>: Windows 10 Pro 22H2 (fully patched as of 2025-05-25)&lt;/li>
+&lt;li>&lt;strong>Build Source&lt;/strong>: Clean ISO install (22H2), upgraded from legacy 10240&lt;/li>
+&lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
+&lt;/ul>
+&lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>

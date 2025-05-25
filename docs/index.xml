@@ -1,28 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Base Templates</title><link>https://opforge.dev/docs/opf-template-notes/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-template-notes/</guid><description>&lt;h1 id="opforge-base-templates">OPFORGE Base Templates&lt;/h1>
-&lt;h2 id="base-ubuntu-2204-template">base-ubuntu-2204-template&lt;/h2>
-&lt;ul>
-&lt;li>OS: Ubuntu 22.04 LTS Minimal&lt;/li>
-&lt;li>Uses: Cloning source for &lt;code>opf-red01&lt;/code>, &lt;code>opf-log01&lt;/code>, &lt;code>opf-ai01&lt;/code>, &lt;code>opf-cloud01&lt;/code>&lt;/li>
-&lt;li>Hardened baseline with:
-&lt;ul>
-&lt;li>UFW firewall&lt;/li>
-&lt;li>SSH key-based auth&lt;/li>
-&lt;li>Git, Python, pip pre-installed&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Snapshot name: &lt;code>Clean Install – Ready for Clone&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="base-windows10-template">base-windows10-template&lt;/h2>
-&lt;ul>
-&lt;li>OS: Windows 10 Pro 22H2 (fully patched)&lt;/li>
-&lt;li>Uses: Cloning source for &lt;code>opf-mbr01&lt;/code>, future victims&lt;/li>
-&lt;li>Tools installed via Chocolatey:
-&lt;ul>
-&lt;li>Sysmon, Winlogbeat, VSCode, Wireshark, Sysinternals&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Pre-Sysprep and snapshot-ready&lt;/li>
-&lt;/ul></description></item><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>OPFORGE began as a minimal cyber range with SOF-ELK and basic telemetry ingest, and has evolved into a segmented, multi-role portfolio lab for red team emulation, detection engineering, and AI-enhanced threat analysis.&lt;/p>
 &lt;h2 id="evolution-timeline">Evolution Timeline&lt;/h2>
@@ -95,46 +71,4 @@
 &lt;td>CSOCINFRA&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>OPFORGE VM CLone Map</title><link>https://opforge.dev/docs/opf-clone-map/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-clone-map/</guid><description>&lt;h1 id="opforge-vm-clone-map">OPFORGE VM Clone Map&lt;/h1>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Template&lt;/th>
-&lt;th>Clone Name&lt;/th>
-&lt;th>Purpose&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-red01&lt;/td>
-&lt;td>Red Team operator box&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-log01&lt;/td>
-&lt;td>Log pipeline (Zeek, OpenSearch)&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-ai01&lt;/td>
-&lt;td>Jupyter + anomaly detection&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>base-ubuntu-2204-template&lt;/td>
-&lt;td>opf-cloud01&lt;/td>
-&lt;td>Targeted web app for attack&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>base-windows10-template&lt;/td>
-&lt;td>opf-mbr01&lt;/td>
-&lt;td>Domain-joined endpoint&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="notes">Notes&lt;/h2>
-&lt;ul>
-&lt;li>All clones renamed post-creation&lt;/li>
-&lt;li>Hostname, IP, and NICs customized per segment&lt;/li>
-&lt;li>Clones are snapshot-friendly and scriptable&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/table></description></item></channel></rss>
