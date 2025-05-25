@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Welcome to OPFORGE on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Welcome to OPFORGE on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Thu, 22 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Lab Infrastructure Overview</title><link>https://opforge.dev/posts/opforge-lab/</link><pubDate>Thu, 22 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge-lab/</guid><description>&lt;h1 id="opforge-lab-infrastructure">OPFORGE Lab Infrastructure&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Welcome to OPFORGE on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Welcome to OPFORGE on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Hardened Base Templates for Red, Blue, and AI VMs in OPFORGE</title><link>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</guid><description>&lt;h2 id="base-ubuntu-2204-template">base-ubuntu-2204-template&lt;/h2>
+&lt;ul>
+&lt;li>OS: Ubuntu 22.04 LTS Minimal&lt;/li>
+&lt;li>Uses: Cloning source for &lt;code>opf-red01&lt;/code>, &lt;code>opf-log01&lt;/code>, &lt;code>opf-ai01&lt;/code>, &lt;code>opf-cloud01&lt;/code>&lt;/li>
+&lt;li>Hardened baseline with:
+&lt;ul>
+&lt;li>UFW firewall&lt;/li>
+&lt;li>SSH key-based auth&lt;/li>
+&lt;li>Git, Python, pip pre-installed&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Snapshot name: &lt;code>Clean Install – Ready for Clone&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="base-windows10-template">base-windows10-template&lt;/h2>
+&lt;ul>
+&lt;li>OS: Windows 10 Pro 22H2 (fully patched)&lt;/li>
+&lt;li>Uses: Cloning source for &lt;code>opf-mbr01&lt;/code>, future victims&lt;/li>
+&lt;li>Tools installed via Chocolatey:
+&lt;ul>
+&lt;li>Sysmon, Winlogbeat, VSCode, Wireshark, Sysinternals&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Pre-Sysprep and snapshot-ready&lt;/li>
+&lt;/ul></description></item><item><title>Designing a Segmented Cyber Lab: OPFORGE Network Architecture</title><link>https://opforge.dev/posts/2024-05-25-opforge-network-design/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-network-design/</guid><description>&lt;h2 id="segments">Segments&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>CSOCINFRA (192.168.20.0/24)&lt;/strong>: Houses &lt;code>opf-log01&lt;/code> (SIEM) and &lt;code>opf-ai01&lt;/code> (ML detection)&lt;/li>
+&lt;li>&lt;strong>LANWORKSTATIONS (192.168.30.0/24)&lt;/strong>: Contains &lt;code>opf-mbr01&lt;/code> and future endpoints&lt;/li>
+&lt;li>&lt;strong>DMZRED (192.168.22.0/24)&lt;/strong>: Hosts attacker targets like &lt;code>opf-cloud01&lt;/code>&lt;/li>
+&lt;li>&lt;strong>ADINFRA (192.168.40.0/24)&lt;/strong>: Supports &lt;code>opf-dc01&lt;/code> and GPO testing&lt;/li>
+&lt;/ul>
+&lt;h2 id="example-host-assignments">Example Host Assignments&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Host&lt;/th>
+&lt;th>IP Address&lt;/th>
+&lt;th>Segment&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>opf-fw01&lt;/td>
+&lt;td>192.168.1.24 (WAN)&lt;/td>
+&lt;td>pfSense router&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>opf-dc01&lt;/td>
+&lt;td>192.168.40.100&lt;/td>
+&lt;td>ADINFRA&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>opf-mbr01&lt;/td>
+&lt;td>192.168.30.101&lt;/td>
+&lt;td>LANWORKSTATIONS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>opf-red01&lt;/td>
+&lt;td>192.168.22.50&lt;/td>
+&lt;td>DMZRED&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>opf-log01&lt;/td>
+&lt;td>192.168.20.12&lt;/td>
+&lt;td>CSOCINFRA&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>From Sandbox to Cyber Range: How OPFORGE Evolved into a Professional Portfolio Lab</title><link>https://opforge.dev/posts/2024-05-25-opforge-infra-evolution/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-infra-evolution/</guid><description>&lt;p>OPFORGE began as a minimal cyber range with SOF-ELK and basic telemetry ingest, and has evolved into a segmented, multi-role portfolio lab for red team emulation, detection engineering, and AI-enhanced threat analysis.&lt;/p>
+&lt;h2 id="evolution-timeline">Evolution Timeline&lt;/h2>
+&lt;h3 id="phase-1-initial-sandbox">Phase 1: Initial Sandbox&lt;/h3>
+&lt;ul>
+&lt;li>Single VM (SOF-ELK)&lt;/li>
+&lt;li>Flat network, no segmentation&lt;/li>
+&lt;li>Manual log ingestion&lt;/li>
+&lt;/ul>
+&lt;h3 id="phase-2-tactical-expansion">Phase 2: Tactical Expansion&lt;/h3>
+&lt;ul>
+&lt;li>Added pfSense (&lt;code>opf-fw01&lt;/code>)&lt;/li>
+&lt;li>Introduced segmentation: &lt;code>CSOCINFRA&lt;/code>, &lt;code>DMZRED&lt;/code>, &lt;code>LANWORKSTATIONS&lt;/code>, &lt;code>ADINFRA&lt;/code>&lt;/li>
+&lt;li>First red team emulation with &lt;code>opf-red01&lt;/code>&lt;/li>
+&lt;li>Winlogbeat and Sysmon on endpoints&lt;/li>
+&lt;/ul>
+&lt;h3 id="phase-3-professionalization">Phase 3: Professionalization&lt;/h3>
+&lt;ul>
+&lt;li>Cloned base templates (&lt;code>base-ubuntu-2204-template&lt;/code>, &lt;code>base-windows10-template&lt;/code>)&lt;/li>
+&lt;li>VM-specific roles: &lt;code>opf-ai01&lt;/code>, &lt;code>opf-log01&lt;/code>, &lt;code>opf-mbr01&lt;/code>, etc.&lt;/li>
+&lt;li>AI and ML integration via Jupyter (&lt;code>opf-ai01&lt;/code>)&lt;/li>
+&lt;li>Multi-tiered ingest pipeline (Zeek → Logstash → OpenSearch)&lt;/li>
+&lt;/ul>
+&lt;h2 id="lessons-learned">Lessons Learned&lt;/h2>
+&lt;ul>
+&lt;li>Legacy OS images break modern tools&lt;/li>
+&lt;li>Cloning base templates improves consistency&lt;/li>
+&lt;li>Network segmentation is essential for realistic detection engineering&lt;/li>
+&lt;/ul></description></item><item><title>Scaling OPFORGE: How I Clone and Manage Cyber Range VMs</title><link>https://opforge.dev/posts/2024-05-25-opforge-vm-cloning/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-vm-cloning/</guid><description>&lt;h2 id="clone-map">Clone Map&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Template&lt;/th>
+&lt;th>Clone Name&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>base-ubuntu-2204-template&lt;/td>
+&lt;td>opf-red01&lt;/td>
+&lt;td>Red Team operator box&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>base-ubuntu-2204-template&lt;/td>
+&lt;td>opf-log01&lt;/td>
+&lt;td>Log pipeline (Zeek, OpenSearch)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>base-ubuntu-2204-template&lt;/td>
+&lt;td>opf-ai01&lt;/td>
+&lt;td>Jupyter + anomaly detection&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>base-ubuntu-2204-template&lt;/td>
+&lt;td>opf-cloud01&lt;/td>
+&lt;td>Targeted web app for attack&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>base-windows10-template&lt;/td>
+&lt;td>opf-mbr01&lt;/td>
+&lt;td>Domain-joined endpoint&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="lessons-learned">Lessons Learned&lt;/h2>
+&lt;ul>
+&lt;li>Clone from snapshot, then personalize (hostname, NIC, IP)&lt;/li>
+&lt;li>Use base templates with all dependencies pre-installed&lt;/li>
+&lt;li>Maintain consistency across VM builds using scripting and snapshots&lt;/li>
+&lt;/ul></description></item><item><title>OPFORGE Lab Infrastructure Overview</title><link>https://opforge.dev/posts/opforge-lab/</link><pubDate>Thu, 22 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge-lab/</guid><description>&lt;h1 id="opforge-lab-infrastructure">OPFORGE Lab Infrastructure&lt;/h1>
 &lt;p>The OPFORGE lab is a purpose-built environment for &lt;strong>Detection Engineering&lt;/strong> and &lt;strong>Threat Emulation&lt;/strong>. It supports training, research, and portfolio alignment with strategic post-military goals, such as cyber-AI integration at national labs.&lt;/p>
 &lt;hr>
 &lt;h2 id="-lab-objectives">🎯 Lab Objectives&lt;/h2>
