@@ -1,5 +1,5 @@
 ---
-title: "Docs"
+title: "OPFORGE Docs"
 layout: "list"
 menu: main
 weight: 5
