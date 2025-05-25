@@ -1,51 +1,36 @@
 ---
 title: "About OPFORGE"
-date: 2025-05-10
-draft: false
+layout: "page"
+menu: main
+weight: 10
 ---
 
-## What is OPFORGE?
+**OPFORGE** (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior U.S. Air Force cyber warfare operator.
 
-**OPFORGE** stands for **Offensive Posture + FORensics + Generation & Engineering**. It's a purpose-built cybersecurity lab environment designed to:
+This project fuses red team emulation, detection engineering, and AI-driven analytics into a unified range built for realism, scalability, and learning impact.
 
-- 🛠️ Emulate adversary behavior
-- 🔍 Ingest and enrich telemetry from Windows and Linux endpoints
-- 🧠 Apply explainable AI to triage and surface detections
-- 📚 Document real-world operator workflows
+## 🎯 Mission
+Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it's a full-stack capability portfolio.
 
-Whether you're reverse-engineering a malware sample, developing YARA rules, or building detection pipelines with SOF-ELK, OPFORGE is designed to mirror the complexity and realism of mission-ready cyber defense.
+## 🧠 Why It Matters
+Modern cyber operations demand more than checklists and tool walkthroughs. OPFORGE showcases:
+- **Segmented network emulation** across red, blue, and cloud environments
+- **Detection engineering pipelines** powered by Winlogbeat, Zeek, and Logstash
+- **AI/ML-enhanced triage** through Jupyter, anomaly modeling, and data science
+- Portfolio-grade infrastructure that mirrors real mission environments
 
----
+## 🧱 What's Under the Hood
+- Custom-built virtual lab using VMware Workstation Pro
+- Ubuntu and Windows 10 templates, hardened and cloned
+- pfSense-based segmentation: `CSOCINFRA`, `DMZRED`, `LANWORKSTATIONS`, `ADINFRA`
+- Sliver, BloodHound, Impacket, Sysmon, OpenSearch, and more
 
-## Mission Goals
-
-1. **Threat Emulation**
-   - Use Atomic Red Team, Caldera, and custom payloads to simulate known TTPs.
-   
-2. **Detection Engineering**
-   - Build, test, and validate detection logic using tools like Winlogbeat, Sysmon, and ELK.
-
-3. **Explainable AI**
-   - Incorporate open-source ML models for clustering, classification, and triage augmentation with transparency and traceability.
-
-4. **Documentation**
-   - Share the setup process, automation, infrastructure, and detection results in a Check–Do–Check blog series.
+## 🔁 Continuously Developed
+This site documents lab builds, detection strategies, red/blue playbooks, and ML research as the lab matures toward integration with platforms like JHU APL and DOE/NNSA-aligned objectives.
 
 ---
 
-## Who's Behind It?
-
-OPFORGE is developed and maintained by [Alfredo Pelaez](https://hackerdemic.com), a cybersecurity leader focused on threat detection, adversary emulation, and applied research. His work blends operational experience with a strong foundation in machine learning and cyber defense strategy to build meaningful, mission-ready solutions.
-
----
-
-## Want to Contribute or Reproduce?
-
-- Visit the [GitHub Repo](https://github.com/ATHL337/opforge-site)
-- Fork the blog series and lab setup documentation
-- Suggest topics or TTPs you'd like to see emulated
-
----
-
-Built using Hugo + PaperMod + GitHub Pages
-Hosted on [opforge.dev](https://opforge.dev)
+Want to contribute ideas or follow the project?
+- 📬 Reach out via [LinkedIn](https://www.linkedin.com/in/alfredopelaez/)
+- 📖 Read the [latest posts](/posts/)
+- 🧪 Explore the [detection pipeline](/docs/)

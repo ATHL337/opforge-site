@@ -22,15 +22,6 @@ OPFORGE began as a minimal cyber range with SOF-ELK and basic telemetry ingest, 
 - AI and ML integration via Jupyter (`opf-ai01`)
 - Multi-tiered ingest pipeline (Zeek → Logstash → OpenSearch)
 
-## Network Layout
-
-| Segment          | Subnet           | Purpose                        |
-|------------------|------------------|--------------------------------|
-| CSOCINFRA        | 192.168.20.0/24  | Log pipeline + AI tools       |
-| LANWORKSTATIONS  | 192.168.30.0/24  | Domain-joined endpoints       |
-| DMZRED           | 192.168.22.0/24  | Attacker target surface       |
-| ADINFRA          | 192.168.40.0/24  | Domain controller subnet      |
-
 ## Lessons Learned
 - Legacy OS images break modern tools
 - Cloning base templates improves consistency
