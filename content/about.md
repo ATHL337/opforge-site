@@ -5,7 +5,7 @@ menu: main
 weight: 10
 ---
 
-**OPFORGE** (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior U.S. Air Force cyber warfare operator.
+**OPFORGE** (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior  cyber warfare operator.
 
 This project fuses red team emulation, detection engineering, and AI-driven analytics into a unified range built for realism, scalability, and learning impact.
 

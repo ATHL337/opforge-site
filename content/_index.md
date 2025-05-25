@@ -1,13 +1,10 @@
 ---
-title: "OPFORGE Content Hub"
+title: "Latest Posts from the OPFORGE Project"
 layout: "list"
-menu: main
-weight: 1
 ---
 
-Welcome to the central hub for all OPFORGE content.
+Welcome to the OPFORGE project blog — a hands-on portfolio exploring cyber operations, detection engineering, and AI-enabled threat emulation.
 
-- 📚 [Documentation](/docs/)
-- 🧠 [Blog Posts](/posts/)
-- 🏷 [Tags](/tags/)
-- 🧬 [About OPFORGE](/about/)
+Below you'll find write-ups on the infrastructure, VM build processes, segmentation logic, and automation techniques powering OPFORGE.
+
+Stay sharp, build clean, and emulate purposefully.
