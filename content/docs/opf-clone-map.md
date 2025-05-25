@@ -1,3 +1,9 @@
+---
+title: "OPFORGE VM CLone Map"
+date: 2025-05-25
+tags: ["documentation", "opforge"]
+---
+
 # OPFORGE VM Clone Map
 
 | Template                   | Clone Name     | Purpose                         |

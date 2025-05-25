@@ -1,3 +1,8 @@
+---
+title: "OPFORGE Network Layout"
+date: 2025-05-25
+tags: ["documentation", "opforge"]
+---
 # OPFORGE Network Layout
 
 ## Segments

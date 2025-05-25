@@ -1,7 +1,6 @@
 ---
 title: "About"
 layout: "page"
-menu: main
 weight: 10
 ---
 

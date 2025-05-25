@@ -1,3 +1,9 @@
+---
+title: "OPFORGE Base Templates"
+date: 2025-05-25
+tags: ["documentation", "opforge"]
+---
+
 # OPFORGE Base Templates
 
 ## base-ubuntu-2204-template
