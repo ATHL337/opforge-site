@@ -16,7 +16,24 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>File properties:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>file shell.exe
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sha256sum shell.exe
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The payload is now ready to be staged from OPF-RED01 or delivered via social engineering as part of a detection validation scenario.&lt;/p></description></item><item><title>Building Hardened Base Templates for Red, Blue, and AI VMs in OPFORGE</title><link>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</guid><description>&lt;h2 id="base-ubuntu-2204-template">base-ubuntu-2204-template&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The payload is now ready to be staged from OPF-RED01 or delivered via social engineering as part of a detection validation scenario.&lt;/p></description></item><item><title>OPF-RED01 Sliver Server Setup</title><link>https://opforge.dev/posts/2025-05-26-opf-red01-sliver-setup/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-26-opf-red01-sliver-setup/</guid><description>&lt;h2 id="sliver-build--launch">Sliver Build &amp;amp; Launch&lt;/h2>
+&lt;p>After cloning the Sliver repository and resolving build prerequisites (notably &lt;code>zip&lt;/code>), the server was compiled successfully using:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /opt/opforge/tools/sliver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Sliver server was then launched:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./sliver-server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="screenshot-of-successful-launch">Screenshot of Successful Launch&lt;/h2>
+&lt;p>&lt;img alt="Sliver Server Launch" loading="lazy" src="https://opforge.dev/images/posts/sliver-server-launch.png">&lt;/p>
+&lt;p>This confirms the Sliver C2 is operational and ready to receive implants or generate payloads.&lt;/p>
+&lt;hr>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>Launch &lt;code>sliver-client&lt;/code> and test C2 communication&lt;/li>
+&lt;li>Generate staged and unstaged payloads&lt;/li>
+&lt;li>Begin Red Team activity with Sliver in DMZRED&lt;/li>
+&lt;li>Monitor OPF-BLUE01/AI01 for correlated events&lt;/li>
+&lt;/ul></description></item><item><title>Building Hardened Base Templates for Red, Blue, and AI VMs in OPFORGE</title><link>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2024-05-25-opforge-template-builds/</guid><description>&lt;h2 id="base-ubuntu-2204-template">base-ubuntu-2204-template&lt;/h2>
 &lt;ul>
 &lt;li>OS: Ubuntu 22.04 LTS Minimal&lt;/li>
 &lt;li>Uses: Cloning source for &lt;code>opf-red01&lt;/code>, &lt;code>opf-log01&lt;/code>, &lt;code>opf-ai01&lt;/code>, &lt;code>opf-cloud01&lt;/code>&lt;/li>
