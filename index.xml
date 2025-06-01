@@ -1,7 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Mon, 26 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Tue, 27 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
 &lt;p>This project fuses red team emulation, detection engineering, and AI-driven analytics into a unified range built for realism, scalability, and learning impact.&lt;/p>
 &lt;h2 id="-mission">🎯 Mission&lt;/h2>
-&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>OPF-RED01 Metasploit Setup &amp; Payload Generation</title><link>https://opforge.dev/posts/2025-05-26-opf-red01-metasploit-setup/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-26-opf-red01-metasploit-setup/</guid><description>&lt;h2 id="metasploit-installed">Metasploit Installed&lt;/h2>
+&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>Correcting OPF-DC01 Placement in ADINFRA Segment</title><link>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</guid><description>&lt;h2 id="background">Background&lt;/h2>
+&lt;p>Originally, &lt;code>OPF-DC01&lt;/code> was deployed with an IP address in the &lt;code>CSOCINFRA (192.168.20.0/24)&lt;/code> subnet. However, per OPFORGE&amp;rsquo;s logical segmentation, all domain services must reside in the &lt;code>ADINFRA (192.168.40.0/24)&lt;/code> segment to maintain operational and architectural integrity.&lt;/p>
+&lt;hr>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>OPF-DC01&lt;/code> had IP &lt;code>192.168.20.100&lt;/code> (incorrect subnet).&lt;/li>
+&lt;li>The gateway was misconfigured as &lt;code>192.168.50.5&lt;/code> (C2 CONTROL).&lt;/li>
+&lt;li>This broke domain service accessibility and violated the subnet&amp;rsquo;s trust boundary.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution&lt;/h2>
+&lt;h3 id="1-re-ip-opf-dc01-to-adinfra">1. Re-IP OPF-DC01 to ADINFRA&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>New-NetIPAddress -InterfaceAlias &lt;span style="color:#e6db74">&amp;#34;Ethernet0&amp;#34;&lt;/span> `
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -IPAddress &lt;span style="color:#e6db74">&amp;#34;192.168.40.100&amp;#34;&lt;/span> `
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -PrefixLength &lt;span style="color:#ae81ff">24&lt;/span> `
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -DefaultGateway &lt;span style="color:#e6db74">&amp;#34;192.168.40.5&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-update-dns">2. Update DNS&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Set-DnsClientServerAddress -InterfaceAlias &lt;span style="color:#e6db74">&amp;#34;Ethernet0&amp;#34;&lt;/span> -ServerAddresses &lt;span style="color:#e6db74">&amp;#34;192.168.40.100&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-fix-default-route">3. Fix Default Route&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Remove-NetRoute -InterfaceAlias &lt;span style="color:#e6db74">&amp;#34;Ethernet0&amp;#34;&lt;/span> -NextHop &lt;span style="color:#ae81ff">192.168&lt;/span>.50.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>New-NetRoute -InterfaceAlias &lt;span style="color:#e6db74">&amp;#34;Ethernet0&amp;#34;&lt;/span> `
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -DestinationPrefix &lt;span style="color:#e6db74">&amp;#34;0.0.0.0/0&amp;#34;&lt;/span> `
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -NextHop &lt;span style="color:#e6db74">&amp;#34;192.168.40.5&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="results">Results&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>OPF-DC01&lt;/code> now properly resides at &lt;code>192.168.40.100&lt;/code>.&lt;/li>
+&lt;li>Routing flows through &lt;code>opf-fw01&lt;/code> via gateway &lt;code>192.168.40.5&lt;/code>.&lt;/li>
+&lt;li>It is ready to serve domain joins from endpoints like &lt;code>OPF-MBR01&lt;/code>.&lt;/li>
+&lt;/ul></description></item><item><title>Fixing DNS Resolution in OPFORGE: Domain Forwarding via pfSense</title><link>https://opforge.dev/posts/2025-05-27-opf-dns-forwarding-infrastructure-fix/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-27-opf-dns-forwarding-infrastructure-fix/</guid><description>&lt;h2 id="-problem-summary">🧩 Problem Summary&lt;/h2>
+&lt;p>After placing &lt;code>OPF-DC01&lt;/code> into the &lt;code>ADINFRA&lt;/code> subnet (192.168.40.0/24), &lt;code>OPF-MBR01&lt;/code> was unable to resolve public domains such as &lt;code>google.com&lt;/code>. DNS requests to &lt;code>192.168.40.100&lt;/code> (the DC) failed to resolve, even though routing to the firewall was functional.&lt;/p>
+&lt;hr>
+&lt;h2 id="-root-cause">🔍 Root Cause&lt;/h2>
+&lt;p>By default, &lt;code>OPF-DC01&lt;/code> was not forwarding DNS queries to a working upstream resolver. Attempted use of public DNS forwarders like &lt;code>8.8.8.8&lt;/code> and &lt;code>1.1.1.1&lt;/code> failed because &lt;code>OPF-DC01&lt;/code> had &lt;strong>no internet access&lt;/strong> in the segmented lab setup.&lt;/p></description></item><item><title>Installing Sysinternals Suite Offline in OPFORGE</title><link>https://opforge.dev/posts/2025-05-27-opf-sysinternals-offline-install/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-27-opf-sysinternals-offline-install/</guid><description>&lt;h2 id="-purpose">🎯 Purpose&lt;/h2>
+&lt;p>In the OPFORGE lab, Chocolatey may not be reliable due to segmented DNS or network control. Here&amp;rsquo;s how to install the full &lt;a href="https://learn.microsoft.com/en-us/sysinternals/">Sysinternals Suite&lt;/a> offline to a standard lab path.&lt;/p>
+&lt;hr>
+&lt;h2 id="-installation-directory">🗂️ Installation Directory&lt;/h2>
+&lt;p>All tools are installed to:&lt;/p>
+&lt;pre tabindex="0">&lt;code>C:\OPFORGE\Tools\Sysinternals
+&lt;/code>&lt;/pre>&lt;p>This ensures consistent, reproducible builds and clean environment variables.&lt;/p>
+&lt;hr>
+&lt;h2 id="-installation-steps">🛠️ Installation Steps&lt;/h2>
+&lt;h3 id="1-download">1. Download&lt;/h3>
+&lt;p>From a system with internet access:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>Invoke-WebRequest -Uri &lt;span style="color:#e6db74">&amp;#34;https://download.sysinternals.com/files/SysinternalsSuite.zip&amp;#34;&lt;/span> -OutFile &lt;span style="color:#e6db74">&amp;#34;SysinternalsSuite.zip&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-transfer-and-install">2. Transfer and Install&lt;/h3>
+&lt;p>Copy the zip to &lt;code>C:\OPFORGE\SysinternalsSuite.zip&lt;/code>, then run:&lt;/p></description></item><item><title>OPF-RED01 Metasploit Setup &amp; Payload Generation</title><link>https://opforge.dev/posts/2025-05-26-opf-red01-metasploit-setup/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-26-opf-red01-metasploit-setup/</guid><description>&lt;h2 id="metasploit-installed">Metasploit Installed&lt;/h2>
 &lt;p>Metasploit was installed using the official &lt;code>msfinstall&lt;/code> script:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb -o msfinstall
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chmod &lt;span style="color:#ae81ff">755&lt;/span> msfinstall
@@ -329,4 +376,18 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title/><link>https://opforge.dev/posts/opforge_rebrand_checklist/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_rebrand_checklist/</guid><description>&lt;p>\&lt;/p>
+&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
+&lt;p>&lt;em>This step-by-step guide is intended to simplify rebranding future versions of Mimikatz under the OPFORGE project. Follow each stage to apply consistent changes and branding.&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
+&lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
+&lt;strong>Purpose&lt;/strong>: Threat Emulation, Detection Engineering, and XAI Alignment&lt;/p>
+&lt;hr>
+&lt;h2 id="-phase-1-clone-and-prepare">✅ Phase 1: Clone and Prepare&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> Clone the Mimikatz repository:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone --recursive https://github.com/gentilkiwi/mimikatz.git tools/mimikatz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> Create a backup or staging copy (optional but recommended):&lt;/p></description></item></channel></rss>
