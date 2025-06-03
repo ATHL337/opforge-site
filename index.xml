@@ -1,7 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Tue, 27 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sat, 31 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
 &lt;p>This project fuses red team emulation, detection engineering, and AI-driven analytics into a unified range built for realism, scalability, and learning impact.&lt;/p>
 &lt;h2 id="-mission">🎯 Mission&lt;/h2>
-&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>Correcting OPF-DC01 Placement in ADINFRA Segment</title><link>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</guid><description>&lt;h2 id="background">Background&lt;/h2>
+&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
+&lt;p>&lt;em>This step-by-step guide simplifies the process of rebranding Mimikatz under the OPFORGE project. Use it to create a portfolio-grade build aligned with Threat Emulation, Detection Engineering, and Explainable AI objectives.&lt;/em>&lt;/p>
+&lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
+&lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
+&lt;strong>Project Alignment&lt;/strong>: &lt;a href="https://opforge.dev">OPFORGE&lt;/a> | High-Yield Performance &amp;amp; Results (H.Y.P.R.) Mindset&lt;/p>
+&lt;hr>
+&lt;h2 id="-phase-1-clone-and-prepare-the-repo">✅ Phase 1: Clone and Prepare the Repo&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> Clone the Mimikatz repository:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone --recursive https://github.com/gentilkiwi/mimikatz.git Tools/mimikatz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> Create a backup copy:&lt;/p></description></item><item><title>Correcting OPF-DC01 Placement in ADINFRA Segment</title><link>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</link><pubDate>Tue, 27 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-27-opf-dc01-corrective-ip-alignment/</guid><description>&lt;h2 id="background">Background&lt;/h2>
 &lt;p>Originally, &lt;code>OPF-DC01&lt;/code> was deployed with an IP address in the &lt;code>CSOCINFRA (192.168.20.0/24)&lt;/code> subnet. However, per OPFORGE&amp;rsquo;s logical segmentation, all domain services must reside in the &lt;code>ADINFRA (192.168.40.0/24)&lt;/code> segment to maintain operational and architectural integrity.&lt;/p>
 &lt;hr>
 &lt;h2 id="problem">Problem&lt;/h2>
@@ -376,18 +389,4 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title/><link>https://opforge.dev/posts/opforge_rebrand_checklist/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_rebrand_checklist/</guid><description>&lt;p>\&lt;/p>
-&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
-&lt;p>&lt;em>This step-by-step guide is intended to simplify rebranding future versions of Mimikatz under the OPFORGE project. Follow each stage to apply consistent changes and branding.&lt;/em>&lt;/p>
-&lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
-&lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
-&lt;strong>Purpose&lt;/strong>: Threat Emulation, Detection Engineering, and XAI Alignment&lt;/p>
-&lt;hr>
-&lt;h2 id="-phase-1-clone-and-prepare">✅ Phase 1: Clone and Prepare&lt;/h2>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;input disabled="" type="checkbox"> Clone the Mimikatz repository:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone --recursive https://github.com/gentilkiwi/mimikatz.git tools/mimikatz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>&lt;input disabled="" type="checkbox"> Create a backup or staging copy (optional but recommended):&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
