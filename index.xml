@@ -1,7 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sat, 31 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Thu, 12 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://opforge.dev/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;p>&lt;strong>OPFORGE&lt;/strong> (Operational Forged Readiness for Generation and Emulation) is a purpose-built cyber lab and portfolio platform developed by H.Y.P.R., a senior cyber warfare operator.&lt;/p>
 &lt;p>This project fuses red team emulation, detection engineering, and AI-driven analytics into a unified range built for realism, scalability, and learning impact.&lt;/p>
 &lt;h2 id="-mission">🎯 Mission&lt;/h2>
-&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
+&lt;p>Create a lab environment that demonstrates real-world adversary behavior and detection response — with automation, analytics, and operational rigor. OPFORGE is more than just a cyber range: it&amp;rsquo;s a full-stack capability portfolio.&lt;/p></description></item><item><title>OPFORGE Network Internet Access Setup Guide</title><link>https://opforge.dev/posts/opforge-internet-setup/</link><pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge-internet-setup/</guid><description>&lt;h1 id="opforge-network-internet-access-setup-guide">OPFORGE Network Internet Access Setup Guide&lt;/h1>
+&lt;p>This guide outlines the configuration steps used to enable full internet access from the Red Network within the OPFORGE lab environment. It includes configuration of VyOS routers &lt;code>opf-rtred&lt;/code> and &lt;code>opf-rt-inet&lt;/code>, as well as ensuring connectivity from a host such as &lt;code>opf-lnx01&lt;/code>.&lt;/p>
+&lt;hr>
+&lt;h2 id="-1-opf-rt-inet-configuration-internet-gateway">🔧 1. &lt;code>opf-rt-inet&lt;/code> Configuration (Internet Gateway)&lt;/h2>
+&lt;h3 id="interfaces">Interfaces&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.2/24 (RED_NET)&lt;/li>
+&lt;li>&lt;code>eth1&lt;/code>: 192.168.1.25/24 (WAN - External/Internet-facing)&lt;/li>
+&lt;/ul>
+&lt;h3 id="commands">Commands&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set interface IPs (if not set)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth0 address 192.168.10.2/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth1 address 192.168.1.25/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Default route to WAN gateway&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable NAT for RED_NET to WAN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> outbound-interface eth1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> source address 192.168.10.0/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> translation address masquerade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable DNS forwarding&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding listen-address 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding allow-from 192.168.10.0/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 1.1.1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 8.8.8.8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="-2-opf-rtred-configuration-red-network-router">🔧 2. &lt;code>opf-rtred&lt;/code> Configuration (Red Network Router)&lt;/h2>
+&lt;h3 id="interfaces-1">Interfaces&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.1/24 (RED_NET)&lt;/li>
+&lt;/ul>
+&lt;h3 id="commands-1">Commands&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set static default route to forward traffic to opf-rt-inet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set DNS resolver to point to opf-rt-inet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set system name-server 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="-3-opf-lnx01-or-red-network-host">🧪 3. &lt;code>opf-lnx01&lt;/code> or Red Network Host&lt;/h2>
+&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
 &lt;p>&lt;em>This step-by-step guide simplifies the process of rebranding Mimikatz under the OPFORGE project. Use it to create a portfolio-grade build aligned with Threat Emulation, Detection Engineering, and Explainable AI objectives.&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
 &lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
@@ -389,57 +442,4 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title/><link>https://opforge.dev/posts/opforge-internet-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge-internet-setup/</guid><description>&lt;h1 id="opforge-network-internet-access-setup-guide">OPFORGE Network Internet Access Setup Guide&lt;/h1>
-&lt;p>This guide outlines the configuration steps used to enable full internet access from the Red Network within the OPFORGE lab environment. It includes configuration of VyOS routers &lt;code>opf-rtred&lt;/code> and &lt;code>opf-rt-inet&lt;/code>, as well as ensuring connectivity from a host such as &lt;code>opf-lnx01&lt;/code>.&lt;/p>
-&lt;hr>
-&lt;h2 id="-1-opf-rt-inet-configuration-internet-gateway">🔧 1. &lt;code>opf-rt-inet&lt;/code> Configuration (Internet Gateway)&lt;/h2>
-&lt;h3 id="interfaces">Interfaces&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.2/24 (RED_NET)&lt;/li>
-&lt;li>&lt;code>eth1&lt;/code>: 192.168.1.25/24 (WAN - External/Internet-facing)&lt;/li>
-&lt;/ul>
-&lt;h3 id="commands">Commands&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set interface IPs (if not set)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth0 address 192.168.10.2/24
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth1 address 192.168.1.25/24
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Default route to WAN gateway&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable NAT for RED_NET to WAN&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> outbound-interface eth1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> source address 192.168.10.0/24
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> translation address masquerade
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable DNS forwarding&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding listen-address 192.168.10.2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding allow-from 192.168.10.0/24
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 1.1.1.1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 8.8.8.8
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;h2 id="-2-opf-rtred-configuration-red-network-router">🔧 2. &lt;code>opf-rtred&lt;/code> Configuration (Red Network Router)&lt;/h2>
-&lt;h3 id="interfaces-1">Interfaces&lt;/h3>
-&lt;ul>
-&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.1/24 (RED_NET)&lt;/li>
-&lt;/ul>
-&lt;h3 id="commands-1">Commands&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set static default route to forward traffic to opf-rt-inet&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.10.2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set DNS resolver to point to opf-rt-inet&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set system name-server 192.168.10.2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
-&lt;h2 id="-3-opf-lnx01-or-red-network-host">🧪 3. &lt;code>opf-lnx01&lt;/code> or Red Network Host&lt;/h2>
-&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
