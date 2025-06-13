@@ -313,4 +313,57 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title/><link>https://opforge.dev/posts/opforge-internet-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge-internet-setup/</guid><description>&lt;h1 id="opforge-network-internet-access-setup-guide">OPFORGE Network Internet Access Setup Guide&lt;/h1>
+&lt;p>This guide outlines the configuration steps used to enable full internet access from the Red Network within the OPFORGE lab environment. It includes configuration of VyOS routers &lt;code>opf-rtred&lt;/code> and &lt;code>opf-rt-inet&lt;/code>, as well as ensuring connectivity from a host such as &lt;code>opf-lnx01&lt;/code>.&lt;/p>
+&lt;hr>
+&lt;h2 id="-1-opf-rt-inet-configuration-internet-gateway">🔧 1. &lt;code>opf-rt-inet&lt;/code> Configuration (Internet Gateway)&lt;/h2>
+&lt;h3 id="interfaces">Interfaces&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.2/24 (RED_NET)&lt;/li>
+&lt;li>&lt;code>eth1&lt;/code>: 192.168.1.25/24 (WAN - External/Internet-facing)&lt;/li>
+&lt;/ul>
+&lt;h3 id="commands">Commands&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set interface IPs (if not set)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth0 address 192.168.10.2/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth1 address 192.168.1.25/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Default route to WAN gateway&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable NAT for RED_NET to WAN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> outbound-interface eth1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> source address 192.168.10.0/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> translation address masquerade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Enable DNS forwarding&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding listen-address 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding allow-from 192.168.10.0/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 1.1.1.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set service dns forwarding name-server 8.8.8.8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="-2-opf-rtred-configuration-red-network-router">🔧 2. &lt;code>opf-rtred&lt;/code> Configuration (Red Network Router)&lt;/h2>
+&lt;h3 id="interfaces-1">Interfaces&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>eth0&lt;/code>: 192.168.10.1/24 (RED_NET)&lt;/li>
+&lt;/ul>
+&lt;h3 id="commands-1">Commands&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set static default route to forward traffic to opf-rt-inet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 0.0.0.0/0 next-hop 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Set DNS resolver to point to opf-rt-inet&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set system name-server 192.168.10.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>save
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="-3-opf-lnx01-or-red-network-host">🧪 3. &lt;code>opf-lnx01&lt;/code> or Red Network Host&lt;/h2>
+&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item></channel></rss>
