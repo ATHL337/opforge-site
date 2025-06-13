@@ -1,4 +1,9 @@
 
+---
+title: "OPFORGE Network Internet Access Setup Guide"
+date: 2025-06-12
+draft: false
+---
 # OPFORGE Network Internet Access Setup Guide
 
 This guide outlines the configuration steps used to enable full internet access from the Red Network within the OPFORGE lab environment. It includes configuration of VyOS routers `opf-rtred` and `opf-rt-inet`, as well as ensuring connectivity from a host such as `opf-lnx01`.
