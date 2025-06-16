@@ -42,7 +42,7 @@ set interfaces ethernet eth1 address '192.168.10.2/30'
 set protocols static route 0.0.0.0/0 next-hop 192.168.10.3
 ```
 
-**On **`opf-rt-red`**:**
+**On **`opf-rt-inet`**:**
 
 ```vyos
 set interfaces ethernet eth0 address '192.168.10.3/30'
