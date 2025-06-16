@@ -60,19 +60,20 @@ This step lays the architectural groundwork for detection surface placement, acc
 ### 🛡️ Zone Trust Model (Diagram Description)
 
 ```
-     [ Internet / WAN ]
+            [ Internet / WAN ]
+                    |
+                    v
+            [ opf-rt-inet ]
+               /     \
+              /       \
+             v         v
+     [ opf-rt-ext ]   [ INT: opf-rt-red ]
             |
             v
-     [ opf-rt-inet ]
-            |       
-            v         
-     [ opf-rt-ext ]  
+        [ opf-rt-dmz ]
             |
             v
-     [ opf-rt-dmz ]
-			|
-			v 
-     [ INT: opf-rt-int ]
+        [ INT: opf-rt-int ]
 
 Zone Trust Levels:
 - WAN: Untrusted
