@@ -64,9 +64,8 @@ This step lays the architectural groundwork for detection surface placement, acc
             |
             v
      [ opf-rt-inet ]
-            |     
             |       
-             v         
+            v         
      [ opf-rt-ext ]  
             |
             v
