@@ -1,7 +1,14 @@
 ---
-
-## title: "OPFORGE Genesis: Designing a Full-Spectrum Cyber Lab" date: 2025-06-16 draft: false tags: [opforge, cyberlab, architecture, post-1] categories: [infrastructure, blog-series, redteam, blueteam] related\_cert: [] tooling: [vyos, pfsense, vmware] artifact\_type: [network\_diagram, setup-notes]
+title: "OPFORGE Genesis: Designing a Full-Spectrum Cyber Lab"
+date: 2025-06-16
+draft: false
+tags: ["opforge", "cyberlab", "architecture", "post-1"]
+categories: ["infrastructure", "blog-series", "redteam", "blueteam"]
+related_cert: []
+tooling: ["vyos", "pfsense", "vmware"]
+artifact_type: ["network_diagram", "setup-notes"]
 ---
+
 > *"Before we wage war in cyberspace, we must first build the battlefield."*
 
 ### 🧭 Overview
