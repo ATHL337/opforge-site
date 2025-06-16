@@ -442,4 +442,8 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title/><link>https://opforge.dev/posts/opforge_post_1_genesis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_1_genesis/</guid><description>&lt;blockquote>
+&lt;p>&lt;em>&amp;ldquo;Before we wage war in cyberspace, we must first build the battlefield.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
+&lt;h3 id="-overview">🧭 Overview&lt;/h3>
+&lt;p>Welcome to the first post of the OPFORGE blog series. This series walks through the step-by-step development of OPFORGE: a purpose-built, full-spectrum cyber operations lab environment designed to showcase and implement real-world capabilities tied to professional certifications, advanced education, and operational experience.&lt;/p>
+&lt;p>In this foundational post, we focus on Phase 1: the initial lab topology and routing architecture. This layer sets the stage for future red vs blue scenarios, AI-driven detection, and system-level investigations.&lt;/p></description></item></channel></rss>
