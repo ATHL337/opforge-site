@@ -34,7 +34,7 @@ This milestone enables offensive tooling on `opf-red01` and `opf-lnx01` to begin
 
 ### 🔧 VyOS Routing Summary
 
-**On **``**:**
+**On **`opf-rt-red`**:**
 
 ```vyos
 set interfaces ethernet eth0 address '192.168.10.1/24'
@@ -42,7 +42,7 @@ set interfaces ethernet eth1 address '192.168.10.2/30'
 set protocols static route 0.0.0.0/0 next-hop 192.168.10.3
 ```
 
-**On **``**:**
+**On **`opf-rt-red`**:**
 
 ```vyos
 set interfaces ethernet eth0 address '192.168.10.3/30'
