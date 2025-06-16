@@ -50,8 +50,8 @@ This phase implements multi-hop routing from RED\_NET to the internet via chaine
              [opf-rt-inet (eth1:192.168.1.25)] — Bridged to internet
 ```
 
-- `` is the edge router for RED\_NET and the default gateway for red team boxes.
-- `` serves as a central hub with a bridged NIC to the physical network, allowing internet access from controlled segments.
+- `opf-rt-red` is the edge router for RED\_NET and the default gateway for red team boxes.
+- `opf-rt-inet` serves as a central hub with a bridged NIC to the physical network, allowing internet access from controlled segments.
 
 ---
 
