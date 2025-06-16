@@ -80,9 +80,9 @@ This modular build enables staged validation and deliberate segmentation — ide
 
 ### 📌 Coming Next
 
-In Post #2, we’ll apply **PMP principles** to define OPFORGE’s work breakdown structure, backlog grooming, and certification-aligned milestones. We’ll also publish the Kanban structure and planning board.
+In Post #2, we’ll complete routing between `opf-rt-red` and `opf-rt-inet`, validate internet access from the RED_NET, and capture packet traces to establish baseline network behavior. We'll also begin designing the next routing phase—linking `opf-rt-inet1` to `opf-rt-ext`—to scaffold segmentation for DMZ and internal services.
 
-Follow along as we bring this battlefield to life—one segment, one packet, and one exploit at a time.
+As we build, each component will map back to a capability area and ultimately showcase how certifications and operational knowledge translate into real-world implementation.
 
 Stay sharp.
 
