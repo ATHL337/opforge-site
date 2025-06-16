@@ -24,9 +24,9 @@ This milestone enables offensive tooling on `opf-red01` and `opf-lnx01` to begin
 - `opf-red01`: 192.168.10.12
 - `opf-lnx01`: 192.168.10.10
 - `opf-rt-red` (eth0): 192.168.10.1 (gateway for RED\_NET)
-- `opf-rt-red` (eth1): 192.168.10.2 (connects to opf-rt-inet)
-- `opf-rt-inet` (eth0): 192.168.10.3 (receives from opf-rt-red)
+- `opf-rt-inet` (eth0): 192.168.10.2 (receives from opf-rt-red)
 - `opf-rt-inet` (eth1): 192.168.1.25 (bridged NIC w/ internet access)
+- `opf-rt-inet` (eth2): [not yet configured]
 
 > Static routes and NAT were configured in VyOS to allow NAT masquerading and routing between RED\_NET and the internet.
 
@@ -34,23 +34,22 @@ This milestone enables offensive tooling on `opf-red01` and `opf-lnx01` to begin
 
 ### 🔧 VyOS Routing Summary
 
-**On **`opf-rt-red`**:**
+**On **``**:**
 
 ```vyos
 set interfaces ethernet eth0 address '192.168.10.1/24'
-set interfaces ethernet eth1 address '192.168.10.2/30'
-set protocols static route 0.0.0.0/0 next-hop 192.168.10.3
+set interfaces ethernet eth1 address '192.168.10.2/24'
+set protocols static route 0.0.0.0/0 next-hop 192.168.10.2
 ```
 
-**On **`opf-rt-inet`**:**
+**On **``**:**
 
 ```vyos
-set interfaces ethernet eth0 address '192.168.10.3/30'
+set interfaces ethernet eth0 address '192.168.10.2/24'
 set interfaces ethernet eth1 address '192.168.1.25/24'
 set nat source rule 100 outbound-interface 'eth1'
 set nat source rule 100 source address '192.168.10.0/24'
 set nat source rule 100 translation address 'masquerade'
-set protocols static route 192.168.10.0/24 next-hop 192.168.10.2
 ```
 
 ---
@@ -80,4 +79,3 @@ In Post #3, we begin laying the groundwork for network segmentation beyond RED\_
 Stay online, stay offensive.
 
 — H.Y.P.R.
-
