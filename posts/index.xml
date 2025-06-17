@@ -1,4 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Posts on OPFORGE</title><link>https://opforge.dev/posts/</link><description>Recent content in OPFORGE Posts on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Mon, 16 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Posts on OPFORGE</title><link>https://opforge.dev/posts/</link><description>Recent content in OPFORGE Posts on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Post 4: Routing from RED NET to DMZ Confirmed</title><link>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</guid><description>&lt;h3 id="-objective">✅ Objective&lt;/h3>
+&lt;p>Ensure full routed communication path from &lt;code>opf-rt-red (192.168.10.1)&lt;/code> to &lt;code>opf-fw-dmz (pfSense, 192.168.21.2)&lt;/code> through:&lt;/p>
+&lt;pre tabindex="0">&lt;code>opf-rt-red → opf-rt-inet → opf-rt-ext → opf-fw-dmz
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h3 id="-summary-of-actions-since-post-3">🧭 Summary of Actions Since Post #3&lt;/h3>
+&lt;h4 id="-interface-corrections">🔧 Interface Corrections&lt;/h4>
+&lt;ul>
+&lt;li>Verified that &lt;code>opf-rt-ext eth1&lt;/code> had correct IP &lt;code>192.168.21.1/24&lt;/code>&lt;/li>
+&lt;li>Corrected VMnet assignment for &lt;code>opf-rt-ext&lt;/code> and &lt;code>opf-fw-dmz&lt;/code> to share same virtual switch (e.g., VMnet3)&lt;/li>
+&lt;li>Validated Layer 2 reachability using &lt;code>arp -an&lt;/code> and ping&lt;/li>
+&lt;/ul>
+&lt;h4 id="-routing-configuration">📦 Routing Configuration&lt;/h4>
+&lt;ul>
+&lt;li>On &lt;code>opf-rt-red&lt;/code>: Static route to &lt;code>192.168.22.0/24&lt;/code> via &lt;code>192.168.10.2&lt;/code>&lt;/li>
+&lt;li>On &lt;code>opf-rt-inet&lt;/code>: Routes to &lt;code>192.168.21.0/24&lt;/code> and &lt;code>192.168.22.0/24&lt;/code> via &lt;code>192.168.22.2&lt;/code>&lt;/li>
+&lt;li>On &lt;code>opf-rt-ext&lt;/code>: Forwarded DMZ-bound traffic to &lt;code>192.168.21.2&lt;/code>&lt;/li>
+&lt;li>On &lt;code>opf-fw-dmz&lt;/code>: Static route to &lt;code>192.168.10.0/24&lt;/code> via &lt;code>192.168.21.1&lt;/code>
+&lt;ul>
+&lt;li>Added to &lt;code>/etc/rc.conf.local&lt;/code> for persistence&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="-firewall-configuration">🔐 Firewall Configuration&lt;/h4>
+&lt;ul>
+&lt;li>pfSense WAN interface rule added:
+&lt;ul>
+&lt;li>&lt;strong>Allow ICMP from any to any&lt;/strong> on WAN&lt;/li>
+&lt;li>Confirmed ICMP echo replies work from &lt;code>opf-rt-red&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="-test-results">🧪 Test Results&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>ping 192.168.21.2&lt;/code> from &lt;code>opf-rt-red&lt;/code>: ✅ Success&lt;/li>
+&lt;li>Traceroute confirmed routed path through &lt;code>opf-rt-inet&lt;/code> and &lt;code>opf-rt-ext&lt;/code>&lt;/li>
+&lt;li>ARP and ICMP traffic verified using &lt;code>tcpdump&lt;/code> and manual ARP queries&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="-lessons-captured">📘 Lessons Captured&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Lesson&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>🔌 VMnet Isolation&lt;/td>
+&lt;td>Misaligned virtual NICs caused unreachable ARP/NIC comms — VM topology must be tightly controlled&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>🔁 Static Routing Discipline&lt;/td>
+&lt;td>Each router must explicitly know how to reach at least one hop forward and one hop back&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>🧱 pfSense Default Behavior&lt;/td>
+&lt;td>ICMP and interzone traffic blocked unless explicitly allowed — must add rules even for internal sim zones&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>🔄 Route Persistence&lt;/td>
+&lt;td>For pfSense, &lt;code>/etc/rc.conf.local&lt;/code> controls static route persistence (not &lt;code>/etc/rc.conf&lt;/code> directly)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="-artifacts-captured">📦 Artifacts Captured&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>opf-fw-dmz&lt;/code> route config: &lt;code>/etc/rc.conf.local&lt;/code>&lt;/li>
+&lt;li>&lt;code>opf-rt-*&lt;/code> route configs: CLI command history + saved config tree&lt;/li>
+&lt;li>Screenshot archive: ICMP and routing confirmation&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="-coming-next">📌 Coming Next&lt;/h3>
+&lt;p>In Post #5, we’ll break down the OPFORGE project using PMP principles:&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
 &lt;p>&lt;em>&amp;ldquo;A secure architecture begins with deliberate separation of trust.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
 &lt;h3 id="-overview">🧭 Overview&lt;/h3>
 &lt;p>Now that RED_NET has outbound access through a routed chain, we&amp;rsquo;re ready to define the next phase of the OPFORGE battlefield: &lt;strong>network segmentation&lt;/strong>.&lt;/p>
