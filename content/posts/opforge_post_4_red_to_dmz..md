@@ -8,6 +8,8 @@ tooling: ["vyos", "pfsense", "vmware"]
 artifact_type: ["routing_config", "pfSense_rules", "verification_notes"]
 ---
 
+_"Firewalls and routers don’t stop threats—discipline and traceability do."_
+
 ### ✅ Objective
 
 Ensure full routed communication path from `opf-rt-red (192.168.10.1)` to `opf-fw-dmz (pfSense, 192.168.21.2)` through\:
