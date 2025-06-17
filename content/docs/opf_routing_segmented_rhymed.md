@@ -93,5 +93,91 @@ echo 'route_internalnet="-net 192.168.60.0/24 192.168.50.2"' >> /etc/rc.conf.loc
 - **Segmented**: Forces all traffic through correct inspection points
 - **Scalable**: Easily extend with `70.x`, `80.x`, etc for future zones
 
-Next: ASCII diagram update to visualize this clean segmented flow.
+### 🖼️ ASCII Diagram: Segmented Routing Overview
 
+```
+    [ Internet / WAN ]
+            |
+     +------v------+         RED_NET          
+     | opf-rt-inet |<----------------------------+
+     | 30.1 / 20.2 |                             |
+     +------^------+                             |
+            |                                    |
+     +------v------+                             |
+     | opf-rt-red  |                             |
+     | 10.1 / 20.1 |---+                         |
+     +-------------+   |                         |
+                       |                         |
+                +------v------+                 |
+                | opf-lnx01    |                |
+                | 10.10        |                |
+                +-------------+                |
+                                              |
+     +-------------+                           |
+     | opf-rt-ext  |<---------------------------+
+     | 30.2 / 40.1 |
+     +------+------+           DMZ_LINK
+            |
+     +------v------+ 
+     | opf-fw-dmz  |
+     | 40.2 / 50.1 |
+     +------+------+
+            |
+     +------v------+
+     | opf-rt-int  |-----> [ INTERNAL_NET ]
+     | 50.2 / 60.1 |
+     +-------------+
+```
+
+*Note: IPs shortened for clarity. Each zone uses a unique /24 subnet.*
+
+## ⚙️ Interface Configuration Commands (VyOS & pfSense)
+
+### `opf-rt-red`
+
+```bash
+set interfaces ethernet eth0 address '192.168.10.1/24'
+set interfaces ethernet eth1 address '192.168.20.1/24'
+set protocols static route 192.168.60.0/24 next-hop 192.168.20.2
+commit; save
+```
+
+### `opf-rt-inet`
+
+```bash
+set interfaces ethernet eth0 address '192.168.20.2/24'
+set interfaces ethernet eth1 address '192.168.30.1/24'
+set protocols static route 192.168.60.0/24 next-hop 192.168.30.2
+commit; save
+```
+
+### `opf-rt-ext`
+
+```bash
+set interfaces ethernet eth0 address '192.168.30.2/24'
+set interfaces ethernet eth1 address '192.168.40.1/24'
+set protocols static route 192.168.60.0/24 next-hop 192.168.40.2
+commit; save
+```
+
+### `opf-fw-dmz` (pfSense CLI)
+
+```sh
+ifconfig em0 inet 192.168.40.2 netmask 255.255.255.0
+ifconfig em1 inet 192.168.50.1 netmask 255.255.255.0
+route add -net 192.168.60.0/24 192.168.50.2
+
+# Persist routes
+echo 'static_routes="internalnet"' >> /etc/rc.conf
+echo 'route_internalnet="-net 192.168.60.0/24 192.168.50.2"' >> /etc/rc.conf.local
+```
+
+### `opf-rt-int`
+
+```bash
+set interfaces ethernet eth0 address '192.168.50.2/24'
+set interfaces ethernet eth1 address '192.168.60.1/24'
+commit; save
+```
+
+✅ All routers are now aligned to the segmented architecture.
