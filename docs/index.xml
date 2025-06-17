@@ -1,4 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Routing Plan: Rhymed Segmented Flow</title><link>https://opforge.dev/docs/opf_routing_segmented_rhymed/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf_routing_segmented_rhymed/</guid><description>&lt;h2 id="-goal">🎯 Goal&lt;/h2>
+&lt;p>Enforce logical traffic flow through each security zone in OPFORGE using a clearly segmented and rhymed IP scheme.&lt;/p>
+&lt;pre tabindex="0">&lt;code>RED_NET → RTR_RED → RTR_INET → RTR_EXT → FW_DMZ → RTR_INT → INTERNAL_NET
+&lt;/code>&lt;/pre>&lt;hr>
+&lt;h2 id="-subnet-allocation-by-zone">🔐 Subnet Allocation by Zone&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Zone/Link&lt;/th>
+&lt;th>Subnet&lt;/th>
+&lt;th>Mnemonic&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>External Internet&lt;/td>
+&lt;td>&lt;code>192.168.1.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>1 = Origin&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RED_NET&lt;/td>
+&lt;td>&lt;code>192.168.10.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>10 = Tension&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RED ↔ INET Transit&lt;/td>
+&lt;td>&lt;code>192.168.20.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>20 = Handoff&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>INET ↔ EXT Transit&lt;/td>
+&lt;td>&lt;code>192.168.30.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>30 = Throttle&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EXT ↔ DMZ Transit&lt;/td>
+&lt;td>&lt;code>192.168.40.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>40 = Border&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DMZ ↔ INTERNAL Transit&lt;/td>
+&lt;td>&lt;code>192.168.50.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>50 = Core Door&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>INTERNAL_NET&lt;/td>
+&lt;td>&lt;code>192.168.60.0/24&lt;/code>&lt;/td>
+&lt;td>&lt;code>60 = Fix-it Net&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-expected-ip-assignments">🚦 Expected IP Assignments&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Device&lt;/th>
+&lt;th>Interface&lt;/th>
+&lt;th>IP Address&lt;/th>
+&lt;th>Connected To&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.10.1/24&lt;/td>
+&lt;td>RED_NET&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.20.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.20.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.30.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.30.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.40.1/24&lt;/td>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code> (em0)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;td>&lt;code>em0&lt;/code>&lt;/td>
+&lt;td>192.168.40.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;td>&lt;code>em1&lt;/code>&lt;/td>
+&lt;td>192.168.50.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.50.2/24&lt;/td>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.60.1/24&lt;/td>
+&lt;td>INTERNAL_NET&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-route-propagation-examples">🧭 Route Propagation (Examples)&lt;/h2>
+&lt;h3 id="on-opf-rt-red">On &lt;code>opf-rt-red&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.60.0/24 next-hop 192.168.20.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="on-opf-rt-inet">On &lt;code>opf-rt-inet&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.60.0/24 next-hop 192.168.30.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="on-opf-rt-ext">On &lt;code>opf-rt-ext&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.60.0/24 next-hop 192.168.40.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="on-opf-fw-dmz-pfsense-cli">On &lt;code>opf-fw-dmz&lt;/code> (pfSense CLI)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>route add -net 192.168.60.0/24 192.168.50.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To persist:&lt;/p></description></item><item><title>OPFORGE Infrastructure Overview</title><link>https://opforge.dev/docs/opf-infra/</link><pubDate>Sun, 25 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf-infra/</guid><description>&lt;h1 id="opforge-infrastructure-overview">OPFORGE Infrastructure Overview&lt;/h1>
 &lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>OPFORGE began as a minimal cyber range with SOF-ELK and basic telemetry ingest, and has evolved into a segmented, multi-role portfolio lab for red team emulation, detection engineering, and AI-enhanced threat analysis.&lt;/p>
 &lt;h2 id="evolution-timeline">Evolution Timeline&lt;/h2>
