@@ -74,7 +74,19 @@
 &lt;/ul>
 &lt;hr>
 &lt;h3 id="-coming-next">📌 Coming Next&lt;/h3>
-&lt;p>In Post #5, we’ll break down the OPFORGE project using PMP principles:&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
+&lt;p>In Post #5, we’ll break down the OPFORGE project using PMP principles:&lt;/p></description></item><item><title>Post 5: End-to-End Routing from RED_NET to INTERNAL_NET</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;The network is like a novel. Every route a sentence, every packet a word, and every dropped reply a plot twist.&amp;rdquo; — Unknown&lt;/p>&lt;/blockquote>
+&lt;h2 id="-summary">🧠 Summary&lt;/h2>
+&lt;p>This milestone focused on resolving the final stretch of segmented routing in OPFORGE: achieving stable, validated connectivity from the RED_NET enclave to hosts inside INTERNAL_NET. After prior success establishing DMZ reachability from RED_NET, we diagnosed and corrected final edge-case routing issues.&lt;/p>
+&lt;h2 id="-key-achievements">✅ Key Achievements&lt;/h2>
+&lt;ul>
+&lt;li>🔄 &lt;strong>All routers (opf-rt-*) and pfSense firewall configured with consistent, valid static routes&lt;/strong>&lt;/li>
+&lt;li>📈 &lt;strong>ICMP and traceroute tests confirmed full reachability from RED_NET to INTERNAL_NET&lt;/strong>&lt;/li>
+&lt;li>🔧 &lt;strong>Corrected misleading or missing gateway definitions in pfSense and VyOS routers&lt;/strong>&lt;/li>
+&lt;li>🖥️ &lt;strong>Validated that Windows host &lt;strong>&lt;code>OPF-DC01&lt;/code>&lt;/strong> inside INTERNAL_NET can reach gateway and nearby routers&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-network-topology-recap">🧩 Network Topology Recap&lt;/h2>
+&lt;p>All devices now adhere to the segmented routing plan defined in &lt;a href="opforge_post_4_routing_rednet_dmz.md">Post 4&lt;/a>. This includes rhymed IP subnets for traceability:&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
 &lt;p>&lt;em>&amp;ldquo;A secure architecture begins with deliberate separation of trust.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
 &lt;h3 id="-overview">🧭 Overview&lt;/h3>
 &lt;p>Now that RED_NET has outbound access through a routed chain, we&amp;rsquo;re ready to define the next phase of the OPFORGE battlefield: &lt;strong>network segmentation&lt;/strong>.&lt;/p>

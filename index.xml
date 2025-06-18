@@ -209,7 +209,19 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.60.0/24 next-hop 192.168.40.2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="on-opf-fw-dmz-pfsense-cli">On &lt;code>opf-fw-dmz&lt;/code> (pfSense CLI)&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>route add -net 192.168.60.0/24 192.168.50.2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To persist:&lt;/p></description></item><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;h1 id="-about-opforge">🔧 About OPFORGE&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To persist:&lt;/p></description></item><item><title>Post 5: End-to-End Routing from RED_NET to INTERNAL_NET</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;The network is like a novel. Every route a sentence, every packet a word, and every dropped reply a plot twist.&amp;rdquo; — Unknown&lt;/p>&lt;/blockquote>
+&lt;h2 id="-summary">🧠 Summary&lt;/h2>
+&lt;p>This milestone focused on resolving the final stretch of segmented routing in OPFORGE: achieving stable, validated connectivity from the RED_NET enclave to hosts inside INTERNAL_NET. After prior success establishing DMZ reachability from RED_NET, we diagnosed and corrected final edge-case routing issues.&lt;/p>
+&lt;h2 id="-key-achievements">✅ Key Achievements&lt;/h2>
+&lt;ul>
+&lt;li>🔄 &lt;strong>All routers (opf-rt-*) and pfSense firewall configured with consistent, valid static routes&lt;/strong>&lt;/li>
+&lt;li>📈 &lt;strong>ICMP and traceroute tests confirmed full reachability from RED_NET to INTERNAL_NET&lt;/strong>&lt;/li>
+&lt;li>🔧 &lt;strong>Corrected misleading or missing gateway definitions in pfSense and VyOS routers&lt;/strong>&lt;/li>
+&lt;li>🖥️ &lt;strong>Validated that Windows host &lt;strong>&lt;code>OPF-DC01&lt;/code>&lt;/strong> inside INTERNAL_NET can reach gateway and nearby routers&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-network-topology-recap">🧩 Network Topology Recap&lt;/h2>
+&lt;p>All devices now adhere to the segmented routing plan defined in &lt;a href="opforge_post_4_routing_rednet_dmz.md">Post 4&lt;/a>. This includes rhymed IP subnets for traceability:&lt;/p></description></item><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;h1 id="-about-opforge">🔧 About OPFORGE&lt;/h1>
 &lt;p>&lt;strong>OPFORGE&lt;/strong> is a purpose-built, full-spectrum cyber operations lab designed to fuse red team emulation, blue team detection, and AI/ML integration into a living portfolio of validated cybersecurity capabilities.&lt;/p>
 &lt;p>Originally created as a threat emulation testbed, OPFORGE has evolved into a scalable platform for demonstrating hands-on technical depth across disciplines—anchored to certifications, graduate-level research, and operational experience.&lt;/p>
 &lt;hr>
