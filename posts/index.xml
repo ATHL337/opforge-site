@@ -89,19 +89,7 @@
 &lt;/ul>
 &lt;hr>
 &lt;h3 id="-coming-next">📌 Coming Next&lt;/h3>
-&lt;p>In Post #5, we’ll break down the OPFORGE project using PMP principles:&lt;/p></description></item><item><title>Post 5: End-to-End Routing from RED_NET to INTERNAL_NET</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
-&lt;p>&amp;ldquo;The network is like a novel. Every route a sentence, every packet a word, and every dropped reply a plot twist.&amp;rdquo; — Unknown&lt;/p>&lt;/blockquote>
-&lt;h2 id="-summary">🧠 Summary&lt;/h2>
-&lt;p>This milestone focused on resolving the final stretch of segmented routing in OPFORGE: achieving stable, validated connectivity from the RED_NET enclave to hosts inside INTERNAL_NET. After prior success establishing DMZ reachability from RED_NET, we diagnosed and corrected final edge-case routing issues.&lt;/p>
-&lt;h2 id="-key-achievements">✅ Key Achievements&lt;/h2>
-&lt;ul>
-&lt;li>🔄 &lt;strong>All routers (opf-rt-*) and pfSense firewall configured with consistent, valid static routes&lt;/strong>&lt;/li>
-&lt;li>📈 &lt;strong>ICMP and traceroute tests confirmed full reachability from RED_NET to INTERNAL_NET&lt;/strong>&lt;/li>
-&lt;li>🔧 &lt;strong>Corrected misleading or missing gateway definitions in pfSense and VyOS routers&lt;/strong>&lt;/li>
-&lt;li>🖥️ &lt;strong>Validated that Windows host &lt;strong>&lt;code>OPF-DC01&lt;/code>&lt;/strong> inside INTERNAL_NET can reach gateway and nearby routers&lt;/strong>&lt;/li>
-&lt;/ul>
-&lt;h2 id="-network-topology-recap">🧩 Network Topology Recap&lt;/h2>
-&lt;p>All devices now adhere to the segmented routing plan defined in &lt;a href="opforge_post_4_routing_rednet_dmz.md">Post 4&lt;/a>. This includes rhymed IP subnets for traceability:&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
+&lt;p>In Post #5, we’ll break down the OPFORGE project using PMP principles:&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
 &lt;p>&lt;em>&amp;ldquo;A secure architecture begins with deliberate separation of trust.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
 &lt;h3 id="-overview">🧭 Overview&lt;/h3>
 &lt;p>Now that RED_NET has outbound access through a routed chain, we&amp;rsquo;re ready to define the next phase of the OPFORGE battlefield: &lt;strong>network segmentation&lt;/strong>.&lt;/p>
@@ -167,7 +155,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
 &lt;h2 id="-3-opf-lnx01-or-red-network-host">🧪 3. &lt;code>opf-lnx01&lt;/code> or Red Network Host&lt;/h2>
-&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
+&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item><item><title>Post 5: DNS &amp; Routing End-to-End</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Sat, 31 May 2025 15:30:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;If you know the way broadly, you will see it in all things.&amp;rdquo; — Miyamoto Musashi&lt;/p>&lt;/blockquote>
+&lt;h1 id="-dns--routing-end-to-end">✨ DNS &amp;amp; Routing End-to-End&lt;/h1>
+&lt;p>This post captures the initial end-to-end routing and DNS resolution across segmented subnets in the OPFORGE lab. It enabled reliable communication across infrastructure zones and laid the groundwork for centralized visibility and detection.&lt;/p>
+&lt;hr>
+&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
+&lt;p>&lt;strong>Problem:&lt;/strong> The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
 &lt;p>&lt;em>This step-by-step guide simplifies the process of rebranding Mimikatz under the OPFORGE project. Use it to create a portfolio-grade build aligned with Threat Emulation, Detection Engineering, and Explainable AI objectives.&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
 &lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
