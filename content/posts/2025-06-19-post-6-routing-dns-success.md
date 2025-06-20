@@ -1,30 +1,91 @@
 ---
-title: "Post 6: DNS and Routing Lock-in across OPFORGE Zones"
-date: 2025-06-19
-tags: ["opforge", "routing", "dns", "lab-network", "firewall", "troubleshooting"]
-categories: ["infrastructure", "redteam", "blueteam"]
-related_cert: ["GCFA", "GCFR"]
-tooling: ["vyos", "pfsense", "vmware", "windows", "linux"]
-artifact_type: ["lab_log", "config_guidance", "snapshot_milestone"]
+title: "Post 6: Routing + DNS Success Across the OPFORGE Lab" 
+date: 2025-06-19T14:15:00-05:00 
+read_time: 8 
+technical_difficulty: "Intermediate" 
+tags: ["opforge", "dns", "routing", "networking"] 
+categories: ["infrastructure", "dns", "routing"] 
+related_cert: ["CISSP", "GCFA", "GCFR"] 
+tooling: ["vyos", "pfSense", "windows", "ubuntu"] 
+artifact_type: ["lab_log", "troubleshooting"]
 ---
 
-# ✅ Phase Summary
 
-We’ve reached a critical milestone: stable **end-to-end routing and DNS resolution across all OPFORGE zones**, including RED_NET, INTERNAL_NET, and DMZ. This post captures what it took to get there, the routing fixes, NAT updates, DNS handoffs, and the principle of least privilege in firewall policies.
+> "It is not because things are difficult that we do not dare, it is because we do not dare that they are difficult." \
+> — Seneca
+
+# 🌐 Routing + DNS Success Across the OPFORGE Lab
+
+In this post, I walk through the successful validation of DNS and routing configurations across segmented OPFORGE networks. After implementing static routes, DNS forwarding, and conditional resolvers, systems across RED, DMZ, INT, and CSOC segments can now resolve `opforge.local` and route correctly.
 
 ---
 
-## 🧠 Background
+## 📌 Abstract
 
-The OPFORGE lab was originally designed with segmentation across five main zones:
+**Problem Statement:** Without effective DNS and route resolution across segmented subnets, endpoint visibility and command/control emulation are degraded. Initial attempts left gaps in cross-zone name resolution and static route propagation.
 
-- **RED_NET** (Offensive tools and test payloads)
-- **INTERNAL_NET** (Enterprise clients and DC)
-- **EXT_NET** (Gateway between RED and DMZ)
-- **DMZ_NET** (Public-facing infrastructure simulation)
-- **InternetSim** (Outbound internet access)
+**Methodology:** Built upon previously defined subnets and pfSense + VyOS topology. Implemented DNS conditional forwarding from pfSense to Domain Controller and set external resolvers on pfSense to enable internet resolution. Verified with `nslookup`, PowerShell, and browser tests.
 
-The challenge was building **a realistic trust boundary** enforced by routers and firewalls—while ensuring systems could still route, resolve, and log across appropriate zones.
+**Certifications & Academic Link:** Supports CISSP (network architecture), GCFA (endpoint resolution validation), GCFR (forensics via FQDN traceability).
+
+**Expected Outcomes:** Cross-segment DNS success, complete route propagation, and operational readiness for Zeek tagging and C2 testing.
+
+---
+
+## 📚 Prerequisites
+
+- Completion of OPFORGE Post 5: DNS server running on `opf-dc01`, pfSense resolver configured
+- Static routes in place between `opf-fw-dmz`, `opf-rt-ext`, `opf-rt-inet`, `opf-rt-int`
+- Windows Domain Controller `opf-dc01` configured at `192.168.60.5`
+- Windows systems configured to use `opf-dc01` as DNS
+- Linux systems resolving via pfSense with `.local` domain override
+
+---
+
+## ✅ Tasks This Phase
+
+- Verified pfSense `System > General Setup` DNS entries: `1.1.1.1`, `8.8.8.8`
+- Enabled DNS Resolver with domain override: `opforge.local` → `192.168.60.5`
+- Confirmed that internal lookups do not leak to upstream resolvers
+- Verified internal and external DNS resolution from both Windows and Linux hosts
+- Captured trace routes and verified NAT return paths
+
+---
+
+## 🔧 Configuration Highlights
+
+### pfSense DNS Configuration
+
+- **DNS Resolver:** Enabled
+- **Domain Override:** `opforge.local` → `192.168.60.5`
+- **External Resolvers:** `1.1.1.1`, `8.8.8.8` in General Settings
+- **Options:** Disabled DNS override and enabled query forwarding
+
+### VyOS Routing
+
+```bash
+configure
+set protocols static route 192.168.30.0/24 next-hop 192.168.20.2
+set protocols static route 192.168.20.0/24 next-hop 192.168.30.1
+delete system name-server <legacy_ip>
+commit; save
+```
+
+### Windows DNS Validation
+
+```powershell
+nslookup opf-dc01.opforge.local
+Resolve-DnsName opf-dc01
+ping opf-dc01
+```
+
+### Linux DNS Validation
+
+```bash
+cat /etc/resolv.conf
+systemd-resolve --status | grep opforge.local
+ping opf-dc01.opforge.local
+```
 
 ---
 
@@ -32,55 +93,20 @@ The challenge was building **a realistic trust boundary** enforced by routers an
 
 To enforce separation of concern and traceable DNS activity, we explicitly assigned roles for DNS resolution across the routers and firewalls:
 
-| Router        | Interface Role         | Primary DNS    | Fallback DNS           | Notes                                           |
-|---------------|------------------------|----------------|------------------------|-------------------------------------------------|
-| `opf-rt-int`  | Internal network       | 192.168.60.5   | 1.1.1.1, 8.8.8.8       | AD DNS for internal name resolution             |
-| `opf-rt-inet` | Internet gateway       | 1.1.1.1        | 8.8.8.8                | No internal resolution, strict egress DNS       |
-| `opf-rt-red`  | Red Team network       | 192.168.50.1   | 1.1.1.1                | Uses pfSense DNS for monitoring/logging         |
-| `opf-rt-ext`  | External/DMZ router    | 192.168.50.1   | 1.1.1.1                | Simulated public infra, isolated                |
-| `opf-fw-dmz`  | DMZ Firewall           | 1.1.1.1        | 8.8.8.8                | Forwarding DNS, optionally recursive            |
-
-This clean separation ensures traceability of DNS queries and allows simulation of **exfiltrating to external resolvers** versus resolving internal enterprise assets.
-
----
-
-## 🔀 Routing Adjustments and NAT Observations
-
-One of the key wins was troubleshooting a **lack of return traffic** from `opf-rt-int` to `opf-rt-inet`. The fix required:
-
-- Adding a static route on `opf-rt-int`:  
-  ```vyos
-  set protocols static route 192.168.40.0/24 next-hop 192.168.60.1
-  ```
-- Verifying that NAT rules were applied **only** on routers at the edge of their zone.
-- Cleaning up legacy `system name-server` entries with:  
-  ```vyos
-  delete system name-server <old_ip>
-  ```
-
-We then committed all changes and validated traffic flow **using ping, traceroute, nslookup, and curl** across the entire topology.
-
----
-
-## 🔐 Firewall Lockdown
-
-The next layer of hardening was done through `opf-fw-dmz` in pfSense. Initially, ICMP traffic from INTERNAL_NET to RED_NET was being **dropped silently** by the default deny rule.
-
-We replaced the blanket “allow all” LAN rule with precision:
-
-- ✅ Allow DNS (TCP/UDP 53) from INTERNAL to DC
-- ✅ Allow NTP (UDP 123)
-- ✅ Allow Web (TCP 80/443) only where needed
-- ✅ Allow ICMP selectively
-- ❌ Block all else with an explicit `DENY ALL` TCP rule at the bottom
-
-Result: **Functional but auditable paths**, enabling future logging of malformed or suspicious packets.
+| Router        | Interface Role      | Primary DNS  | Fallback DNS     | Notes                                     |
+| ------------- | ------------------- | ------------ | ---------------- | ----------------------------------------- |
+| `opf-rt-int`  | Internal network    | 192.168.60.5 | 1.1.1.1, 8.8.8.8 | AD DNS for internal name resolution       |
+| `opf-rt-inet` | Internet gateway    | 1.1.1.1      | 8.8.8.8          | No internal resolution, strict egress DNS |
+| `opf-rt-red`  | Red Team network    | 192.168.50.1 | 1.1.1.1          | Uses pfSense DNS for monitoring/logging   |
+| `opf-rt-ext`  | External/DMZ router | 192.168.50.1 | 1.1.1.1          | Simulated public infra, isolated          |
+| `opf-fw-dmz`  | DMZ Firewall        | 1.1.1.1      | 8.8.8.8          | Forwarding DNS, optionally recursive      |
 
 ---
 
 ## 🧪 Final Validations
 
-From `OPF-DC01`:
+From `OPF-DC01` (`192.168.60.5`):
+
 - 🟢 Can ping all expected routers
 - 🟢 `nslookup google.com` resolves via `opf-fw-dmz`
 - 🟢 `tracert` validates return paths
@@ -101,15 +127,21 @@ After completing this, I took **snapshots of all active VMs** under the `OPFORGE
 
 ---
 
-## 📁 Next Up
+## 🌟 Key Takeaways
 
-In Post 7, I’ll introduce:
-- 🧱 VLAN testing for future segmentation
-- 🧪 Simulated lateral movement from RED_NET → DMZ → INT
-- 🧠 DNS over HTTPS vs. internal detection via Zeek and Winlogbeat
+- Conditional DNS forwarding via pfSense links internal domain awareness with internet access
+- Static routes across VyOS routers require clean design and bidirectional consideration
+- Using multiple OS types validated cross-platform reliability of infrastructure
 
-> Each success builds resilience. We’re simulating the fog of war, but laying fiber-optic clarity beneath it.
+---
 
-Stay sharp.
+## 🗺 On Deck
 
-—HYPR
+- Begin Zeek deployment for passive DNS and connection monitoring
+- Create DNS logging use cases to support detection engineering
+- Implement DHCP reservations and test reverse lookup integration
+
+This milestone solidifies the foundational DNS and routing necessary for advanced OPFORGE testing. From here, the lab grows smarter.
+
+- H.Y.P.R.
+
