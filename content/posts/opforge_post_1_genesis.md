@@ -1,6 +1,6 @@
 ---
 title: "Post 1: Genesis of OPFORGE" 
-date: 2025-05-16T08:00:00-05:00 
+date: 2025-06-16T08:00:00-05:00 
 read_time: 5 
 technical_difficulty: "Beginner" 
 tags: ["opforge", "lab_setup", "vmware", "planning"] 
