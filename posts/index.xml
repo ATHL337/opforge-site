@@ -13,24 +13,25 @@
 &lt;li>&lt;strong>DMZ_NET&lt;/strong> (Public-facing infrastructure simulation)&lt;/li>
 &lt;li>&lt;strong>InternetSim&lt;/strong> (Outbound internet access)&lt;/li>
 &lt;/ul>
-&lt;p>The challenge was building &lt;strong>a realistic trust boundary&lt;/strong> enforced by routers and firewalls—while ensuring systems could still route, resolve, and log across appropriate zones.&lt;/p></description></item><item><title>Post 4: Initial Connectivity – Red to DMZ Validation</title><link>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</link><pubDate>Tue, 17 Jun 2025 23:02:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</guid><description>&lt;blockquote>
-&lt;p>&amp;ldquo;In the midst of chaos, there is also opportunity.&amp;rdquo; — Sun Tzu&lt;/p>&lt;/blockquote>
-&lt;h1 id="-initial-connectivity--red-to-dmz-validation">✨ Initial Connectivity – Red to DMZ Validation&lt;/h1>
-&lt;p>This post captures the preliminary test to confirm routed communication between the Red Team subnet and the DMZ prior to full lab routing. It served as a necessary checkpoint to ensure that the segmented network was behaving as expected before DNS, NAT, and VLAN tagging were added.&lt;/p>
-&lt;hr>
-&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
-&lt;p>&lt;strong>Problem:&lt;/strong> With the new segmented topology in OPFORGE, we needed to verify that basic IP connectivity from RED → DMZ was functional before layering on DNS and full routing.&lt;/p></description></item><item><title>Post 5: DNS &amp; Routing End-to-End</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 15:30:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
+&lt;p>The challenge was building &lt;strong>a realistic trust boundary&lt;/strong> enforced by routers and firewalls—while ensuring systems could still route, resolve, and log across appropriate zones.&lt;/p></description></item><item><title>Post 5: DNS &amp; Routing End-to-End</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 02:57:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
 &lt;p>&amp;ldquo;If you know the way broadly, you will see it in all things.&amp;rdquo; — Miyamoto Musashi&lt;/p>&lt;/blockquote>
 &lt;h1 id="-dns--routing-end-to-end">✨ DNS &amp;amp; Routing End-to-End&lt;/h1>
 &lt;p>This post captures the initial end-to-end routing and DNS resolution across segmented subnets in the OPFORGE lab. It enabled reliable communication across infrastructure zones and laid the groundwork for centralized visibility and detection.&lt;/p>
 &lt;hr>
 &lt;h2 id="-abstract">📌 Abstract&lt;/h2>
-&lt;p>&lt;strong>Problem:&lt;/strong> The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.&lt;/p></description></item><item><title>Defining the Battlefield: Segmentation Planning Begins</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
-&lt;p>&lt;em>&amp;ldquo;A secure architecture begins with deliberate separation of trust.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
-&lt;h3 id="-overview">🧭 Overview&lt;/h3>
-&lt;p>Now that RED_NET has outbound access through a routed chain, we&amp;rsquo;re ready to define the next phase of the OPFORGE battlefield: &lt;strong>network segmentation&lt;/strong>.&lt;/p>
-&lt;p>In this post, we document our initial IP planning and interface mapping across the four planned security zones: RED (offensive ops), EXT (external untrusted), DMZ (controlled exposure), and INT (internal services and endpoints).&lt;/p>
-&lt;p>This step lays the architectural groundwork for detection surface placement, access control enforcement, and future emulation scenarios.&lt;/p></description></item><item><title>First Route, First Blood: Standing Up RED NET</title><link>https://opforge.dev/posts/opforge_post_2_routing/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_2_routing/</guid><description>&lt;blockquote>
+&lt;p>&lt;strong>Problem:&lt;/strong> The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.&lt;/p></description></item><item><title>Post 4: Initial Connectivity – Red to DMZ Validation</title><link>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</link><pubDate>Tue, 17 Jun 2025 02:55:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;In the midst of chaos, there is also opportunity.&amp;rdquo; — Sun Tzu&lt;/p>&lt;/blockquote>
+&lt;h1 id="-initial-connectivity--red-to-dmz-validation">✨ Initial Connectivity – Red to DMZ Validation&lt;/h1>
+&lt;p>This post captures the preliminary test to confirm routed communication between the Red Team subnet and the DMZ prior to full lab routing. It served as a necessary checkpoint to ensure that the segmented network was behaving as expected before DNS, NAT, and VLAN tagging were added.&lt;/p>
+&lt;hr>
+&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
+&lt;p>&lt;strong>Problem:&lt;/strong> With the new segmented topology in OPFORGE, we needed to verify that basic IP connectivity from RED → DMZ was functional before layering on DNS and full routing.&lt;/p></description></item><item><title>Post 3: Foundational Segmentation Setup</title><link>https://opforge.dev/posts/opforge_post_3_segmentation/</link><pubDate>Tue, 17 Jun 2025 02:49:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_3_segmentation/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;Order and simplification are the first steps toward mastery of a subject.&amp;rdquo; — Thomas Mann&lt;/p>&lt;/blockquote>
+&lt;h1 id="-foundational-segmentation-setup">✨ Foundational Segmentation Setup&lt;/h1>
+&lt;p>This post captures the introduction of initial segmentation boundaries within the OPFORGE lab. Before advanced VLAN tagging and DMZ logic, basic subnet design and routing were validated to support scalable infrastructure development.&lt;/p>
+&lt;hr>
+&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
+&lt;p>&lt;strong>Problem Statement:&lt;/strong> The original flat lab design limited control over traffic flow and security boundaries, making it unsuitable for advanced threat simulation or detection testing.&lt;/p></description></item><item><title>First Route, First Blood: Standing Up RED NET</title><link>https://opforge.dev/posts/opforge_post_2_routing/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_2_routing/</guid><description>&lt;blockquote>
 &lt;p>&lt;em>&amp;ldquo;Before you can emulate an adversary, you must be able to reach the battlefield.&amp;rdquo;&lt;/em>&lt;/p>&lt;/blockquote>
 &lt;h3 id="-overview">🧭 Overview&lt;/h3>
 &lt;p>In Post #1, we covered the initial design philosophy behind OPFORGE and the high-level segmentation plan. Now it’s time to get traffic moving. In this post, we focus on building and validating the first complete routing path from RED_NET to the public internet.&lt;/p>
