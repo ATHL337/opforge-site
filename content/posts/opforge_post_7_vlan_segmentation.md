@@ -1,6 +1,6 @@
 ---
 title: "Post 7: VLAN Foundations and DMZ Segmentation" 
-date: 2025-06-19T20:15:00-05:00 
+date: 2025-06-19T20:45:00-05:00 
 tags: ["opforge", "segmentation", "vlan", "dmz", "firewall", "routing"] 
 categories: ["infrastructure", "networking", "future_lab"] 
 related_cert: ["GCIA", "GCIH", "GCTI"] 
@@ -19,6 +19,18 @@ This marks a major milestone in OPFORGE’s design maturity by implementing earl
 
 ---
 
+## 📌 Abstract
+
+**Problem Statement:** The OPFORGE lab must evolve to represent segmented enterprise networks to reflect realistic detection conditions for adversary emulation.
+
+**Methodology:** Introduce VLAN tagging using 802.1Q between critical routers and pfSense firewall, simulate the DMZ, and update NAT/firewall policies to reflect this segmentation.
+
+**Certifications & Academic Link:** This post aligns with GCIA, GCIH, and GCTI by emphasizing perimeter segmentation, NAT traversal, and protocol visibility for detection engineering. It also reinforces OSI layering and architectural thinking central to graduate coursework.
+
+**Expected Outcomes:** A segmented path between RED\_NET and INT via DMZ with VLAN logic fully implemented and supporting continued emulation and detection fidelity.
+
+---
+
 ## ✅ Tasks This Phase
 
 - Created VLAN 41 on `opf-fw-dmz` and `opf-rt-ext` with tag `41`
@@ -27,6 +39,15 @@ This marks a major milestone in OPFORGE’s design maturity by implementing earl
 - Updated DNS resolver and gateway settings
 - Validated static routes in `opf-rt-ext` and `opf-rt-inet`
 - Preserved connectivity while introducing 802.1Q tagging and scoped routing
+
+---
+
+## 📚 Prerequisites
+
+- Familiarity with pfSense and VyOS routing
+- Understanding of NAT and firewall rules
+- Basics of 802.1Q VLAN tagging
+- Prior completion of OPFORGE Post 5 (Routing and DNS)
 
 ---
 
@@ -88,6 +109,14 @@ commit ; save
 
 ---
 
+## 🎯 Key Takeaways
+
+- VLAN tagging via 802.1Q is now integrated across pfSense and VyOS
+- End-to-end reachability was preserved through precise NAT and routing updates
+- OPFORGE now has a DMZ segment that mirrors modern enterprise segmentation logic
+
+---
+
 ## 🧭 On Deck
 
 - VLAN interface tagging at the endpoint level for `opf-lnx01` and `opf-red01`
@@ -96,5 +125,5 @@ commit ; save
 
 The OPFORGE lab continues to grow into a realistic cyber terrain environment where detection, emulation, and validation are not just tested—they’re trusted.
 
-\- H.Y.P.R.
+- H.Y.P.R.
 
