@@ -1,8 +1,7 @@
 
 ---
 title: "Post 7: VLAN Foundations and DMZ Segmentation"
-date: 2025-06-19T20:45:00-05:00
-time: 7:53pm
+date: 2025-06-19T20:15:00-05:00
 tags: ["opforge", "segmentation", "vlan", "dmz", "firewall", "routing"]
 categories: ["infrastructure", "networking", "future_lab"]
 related_cert: ["GCIA", "GCIH", "GCTI"]
