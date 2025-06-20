@@ -1,90 +1,102 @@
 ---
-title: "OPFORGE Genesis: Designing a Full-Spectrum Cyber Lab"
-date: 2025-06-16
-draft: false
-tags: ["opforge", "cyberlab", "architecture", "post-1"]
-categories: ["infrastructure", "blog-series", "redteam", "blueteam"]
-related_cert: []
-tooling: ["vyos", "pfsense", "vmware"]
-artifact_type: ["network_diagram", "setup-notes"]
+title: "Post 1: Genesis of OPFORGE" 
+date: 2025-05-16T08:00:00-05:00 
+read_time: 5 
+technical_difficulty: "Beginner" 
+tags: ["opforge", "lab_setup", "vmware", "planning"] 
+categories: ["infrastructure", "foundations"] 
+related_cert: ["CISSP", "OSCP"] 
+tooling: ["vmware"] 
+artifact_type: ["project_kickoff", "lab_log"]
 ---
 
-> *"Before we wage war in cyberspace, we must first build the battlefield."*
+> "First say to yourself what you would be; and then do what you have to do." — Epictetus
 
-### 🧭 Overview
+# 🚀 Genesis of OPFORGE
 
-Welcome to the first post of the OPFORGE blog series. This series walks through the step-by-step development of OPFORGE: a purpose-built, full-spectrum cyber operations lab environment designed to showcase and implement real-world capabilities tied to professional certifications, advanced education, and operational experience.
-
-In this foundational post, we focus on Phase 1: the initial lab topology and routing architecture. This layer sets the stage for future red vs blue scenarios, AI-driven detection, and system-level investigations.
-
----
-
-### 🌐 Initial Network Segment: RED\_NET
-
-The **RED\_NET** is our threat emulation and offensive operations subnet. It contains:
-
-- `opf-red01` – Main Red Team C2 (Sliver, Covenant, custom tooling)
-- `opf-lnx01` – Linux-based offensive staging (Python tooling, Impacket, BloodHound)
-- Gateway: `opf-rt-red (eth0: 192.168.10.1)`
-
-Subnet: `192.168.10.0/24`
+The launch of OPFORGE marks the deliberate beginning of a long-range effort to build a portfolio-driven, enterprise-grade cyber operations lab. This post documents the rationale, guiding principles, and initial actions to set up the OPFORGE lab environment using VMware Workstation Pro.
 
 ---
 
-### 🔁 Routing Infrastructure (Phase 1)
+## 📌 Abstract
 
-This phase implements multi-hop routing from RED\_NET to the internet via chained VyOS routers. It emulates a real-world multi-zone topology with enforced segmentation and control points.
+**Problem Statement:** Many cyber professionals lack a personalized, practical testbed to validate tools, emulate adversaries, and showcase capabilities. OPFORGE fills that gap through structured lab design.
 
-#### Routing Flow:
+**Methodology:** This phase established foundational infrastructure: created core VM folders, downloaded initial VM images, and structured network segmentation to support growth.
 
+**Certifications & Academic Link:** This project supports CISSP (security architecture), OSCP (hands-on exploitation testbed), and forms the environment for future GCFA/GCFR forensics testing.
+
+**Expected Outcomes:** Establish base VM structure, logical folder organization, and prepare for segmentation and routing in follow-on phases.
+
+---
+
+## 📚 Prerequisites
+
+- VMware Workstation Pro (or equivalent hypervisor)
+- Host system with at least 64GB RAM and 1TB storage
+- Basic familiarity with virtual machine deployment
+- Target VMs downloaded: Windows 10, Kali Linux, pfSense, Ubuntu Server
+
+---
+
+## ✅ Tasks This Phase
+
+- Define OPFORGE project structure: `E:/OPFORGE/VMs/` with subfolders by role
+- Download and validate OS images from trusted sources
+- Deploy base VMs:
+  - `opf-mbr01` (Windows endpoint)
+  - `opf-blue01` (SIFT workstation)
+  - `opf-red01` (Kali Linux)
+  - `opf-fw-dmz` (pfSense firewall)
+  - `opf-dc01` (Domain Controller)
+- Plan logical subnets for future segmentation
+- Design base lab network using VMware custom VMnets
+
+---
+
+## 🔧 Configuration Highlights
+
+### VM Folder Structure
+
+```text
+E:/OPFORGE/VMs/
+├── Endpoints/
+│   ├── OPF-MBR01
+│   └── OPF-BLUE01
+├── Infrastructure/
+│   ├── OPF-DC01
+│   └── OPF-FW-DMZ
+├── Attack/
+│   └── OPF-RED01
 ```
-[opf-red01]      [opf-lnx01]
-     |                |
-     |                |
-     +------> [opf-rt-red (eth0:192.168.10.1)]
-                        |
-                        v
-             [opf-rt-inet (eth0:192.168.10.2)]
-                        |
-                        v
-             [opf-rt-inet (eth1:192.168.1.25)] — Bridged to internet
-```
 
-- `opf-rt-red` is the edge router for RED\_NET and the default gateway for red team boxes.
-- `opf-rt-inet` serves as a central hub with a bridged NIC to the physical network, allowing internet access from controlled segments.
+### VM Network Plan (Initial Draft)
+
+| VM         | Role            | IP Range        | VMnet Assigned |
+| ---------- | --------------- | --------------- | -------------- |
+| OPF-MBR01  | Workstation     | 192.168.60.0/24 | VMnet6         |
+| OPF-BLUE01 | Blue Team Tools | 192.168.60.0/24 | VMnet6         |
+| OPF-RED01  | Attack Platform | 192.168.10.0/24 | VMnet2         |
+| OPF-FW-DMZ | Firewall        | Multi-Zone      | VMnet4, VMnet5 |
+| OPF-DC01   | Domain Services | 192.168.30.0/24 | VMnet3         |
 
 ---
 
-### ⚙️ Not Yet Configured (Next Steps)
+## 🌟 Key Takeaways
 
-These routers are placed but not yet configured. These represent the external, DMZ, and internal zones:
-
-| Router        | NIC  | Destination                         | Note              |
-| ------------- | ---- | ----------------------------------- | ----------------- |
-| `opf-rt-inet` | eth2 | To `opf-rt-ext`                     | Static IP pending |
-| `opf-rt-ext`  | TBD  | To `opf-rt-dmz` (pfSense)           | Static IP pending |
-| `opf-rt-dmz`  | TBD  | To `opf-rt-int`                     | Static IP pending |
-| `opf-rt-int`  | TBD  | To `INTERNAL_NET (192.168.30.0/24)` | Not set up yet    |
-
-This modular build enables staged validation and deliberate segmentation — ideal for tracking ingress/egress across threat zones.
+- A clear file and folder structure supports long-term lab sustainability
+- Early VM deployment sets the stage for future segmentation and attack simulation
+- Planning subnets early simplifies routing and firewall implementation later
 
 ---
 
-### 🔖 Artifacts Created
+## 🧭 On Deck
 
-- Draft network map (WIP; will be converted to diagram)
-- VyOS routing configs for `opf-rt-red` and `opf-rt-inet`
-- Lab documentation in Obsidian + GitHub wiki
+- Implement routing via VyOS to enable inter-subnet communication
+- Configure pfSense interfaces and NAT rules
+- Begin testing DNS and AD join for `opf-mbr01`
 
----
+From the first VM clone to the final lateral movement, OPFORGE begins with purpose.
 
-### 📌 Coming Next
-
-In Post #2, we’ll complete routing between `opf-rt-red` and `opf-rt-inet`, validate internet access from the RED_NET, and capture packet traces to establish baseline network behavior. We'll also begin designing the next routing phase—linking `opf-rt-inet1` to `opf-rt-ext`—to scaffold segmentation for DMZ and internal services.
-
-As we build, each component will map back to a capability area and ultimately showcase how certifications and operational knowledge translate into real-world implementation.
-
-Stay sharp.
-
-— H.Y.P.R.
+- H.Y.P.R.
 

@@ -1,81 +1,104 @@
 ---
-title: "First Route, First Blood: Standing Up RED\_NET"
-date: 2025-06-16
-draft: false
-tags: ["opforge", "vyos", "redteam", "routing", "post-2"]
-categories: ["infrastructure", "redteam", "routing"]
-related_cert: ["OSCP", "GPEN", "PMP"]
-tooling: ["vyos", "vmware", "tcpdump"]
-artifact_type: ["routing_config", "traffic_capture", "validation_notes"]
+title: "Post 2: Routing the OPFORGE Lab" 
+date: 2025-06-16T14:00:00-05:00 
+tags: ["opforge", "routing", "vyos", "networking"] 
+categories: ["infrastructure", "networking"] 
+related_cert: ["CISSP", "OSCP"] 
+tooling: ["vyos", "vmware"] 
+artifact_type: ["lab_log", "network_design"]
 ---
 
-> *"Before you can emulate an adversary, you must be able to reach the battlefield."*
+> "You must understand the whole of life, not just one little part of it. That is why you must read, look at the skies, sing, and dance." — Jiddu Krishnamurti
 
-### 🧭 Overview
+# 🧠 Routing the OPFORGE Lab
 
-In Post #1, we covered the initial design philosophy behind OPFORGE and the high-level segmentation plan. Now it’s time to get traffic moving. In this post, we focus on building and validating the first complete routing path from RED\_NET to the public internet.
-
-This milestone enables offensive tooling on `opf-red01` and `opf-lnx01` to begin live-fire interaction with the outside world in a controlled and observable way. The setup also establishes our first artifact set: routed VyOS configs, packet captures, and validation logs.
+This post outlines the implementation of static routing across segmented subnets in the OPFORGE lab using VyOS routers. With a baseline topology now established, we focus on connecting RED, INT, and DMZ zones through transit routers and validating initial east-west communication.
 
 ---
 
-### 🌐 Confirmed Network Map (Phase 1)
+## 📌 Abstract
 
-- `opf-red01`: 192.168.10.12
-- `opf-lnx01`: 192.168.10.10
-- `opf-rt-red` (eth0): 192.168.10.1 (gateway for RED\_NET)
-- `opf-rt-inet` (eth0): 192.168.10.2 (receives from opf-rt-red)
-- `opf-rt-inet` (eth1): 192.168.1.25 (bridged NIC w/ internet access)
-- `opf-rt-inet` (eth2): [not yet configured]
+**Problem Statement:** Without clear routing logic, segmented subnets like RED\_NET and DMZ\_NET could not communicate securely. Static routing is necessary for simulating real-world traffic flows, Red Team movement, and Blue Team monitoring.
 
-> Static routes and NAT were configured in VyOS to allow NAT masquerading and routing between RED\_NET and the internet.
+**Methodology:** VyOS routers were configured to interconnect the RED, DMZ, and INT zones using static routes. The transit router (`opf-rt-inet`) serves as a hop point for cross-subnet flows. Each zone maintains routing awareness without using a dynamic protocol like OSPF, making the behavior predictable and testable.
+
+**Certifications & Academic Link:** This phase aligns with CISSP (Network Security Architecture) and OSCP (internal pivoting). It supports GCFA/GCFR use cases by enabling data path tracking.
+
+**Expected Outcomes:** Enable reachability across segments, support future firewall and NAT rules, and establish a platform for Zeek and Winlogbeat traffic logging.
 
 ---
 
-### 🔧 VyOS Routing Summary
+## 📚 Prerequisites
 
-**On **``**:**
+- VMware Workstation with at least 3 VMnets assigned
+- Basic working knowledge of VyOS CLI
+- OPFORGE VM deployment with:
+  - `opf-rt-red`: handles RED\_NET traffic
+  - `opf-rt-inet`: middlebox router
+  - `opf-fw-dmz`: terminates DMZ zone
 
-```vyos
-set interfaces ethernet eth0 address '192.168.10.1/24'
-set interfaces ethernet eth1 address '192.168.10.2/24'
-set protocols static route 0.0.0.0/0 next-hop 192.168.10.2
+---
+
+## ✅ Tasks This Phase
+
+- Assign IP addresses to interfaces across three routers
+- Configure static routes to interconnect RED, INT, and DMZ
+- Use ICMP to verify reachability between zones
+- Confirm that routers can reach pfSense for future gateway testing
+
+---
+
+## 🔧 Configuration & Validation
+
+### VyOS: `opf-rt-red`
+
+```bash
+configure
+set interfaces ethernet eth0 address 192.168.10.1/24
+set interfaces ethernet eth1 address 192.168.20.1/24
+set protocols static route 192.168.50.0/24 next-hop 192.168.20.2
+commit ; save
 ```
 
-**On **``**:**
+### VyOS: `opf-rt-inet`
 
-```vyos
-set interfaces ethernet eth0 address '192.168.10.2/24'
-set interfaces ethernet eth1 address '192.168.1.25/24'
-set nat source rule 100 outbound-interface 'eth1'
-set nat source rule 100 source address '192.168.10.0/24'
-set nat source rule 100 translation address 'masquerade'
+```bash
+configure
+set interfaces ethernet eth0 address 192.168.20.2/24
+set interfaces ethernet eth1 address 192.168.30.1/24
+set protocols static route 192.168.10.0/24 next-hop 192.168.20.1
+set protocols static route 192.168.50.0/24 next-hop 192.168.30.2
+commit ; save
+```
+
+### pfSense: `opf-fw-dmz`
+
+- `em0` = 192.168.30.2 (connected to `opf-rt-inet`)
+- `em1` = 192.168.50.1 (DMZ firewall interface)
+
+Test from `opf-rt-red`:
+
+```bash
+ping 192.168.50.1
 ```
 
 ---
 
-### ✅ Routing Validation
+## 🌟 Key Takeaways
 
-1. Confirmed default gateway on both `opf-red01` and `opf-lnx01` is `192.168.10.1`
-2. ICMP verified up the chain to `opf-rt-inet`
-3. Outbound DNS resolution validated from `opf-red01`
-4. Reached external IP (e.g. `curl ifconfig.me`) from RED\_NET
-5. Captured outbound traffic on `opf-rt-inet` (eth1) with `tcpdump`
+- Static routing between zones allows deliberate control over flow paths
+- Intermediate routing via `opf-rt-inet` simplifies NAT and monitoring
+- Routing logic sets the foundation for firewall and segmentation work
 
 ---
 
-### 🧪 Artifacts Captured
+## 🧭 On Deck
 
-- VyOS configs for `opf-rt-red` and `opf-rt-inet`
-- TCP dump from outbound session (available in `/artifacts/rednet-routing/`)
-- Markdown logs in Obsidian for each validation step
+- Confirm DNS configuration from RED to DMZ
+- Expand DMZ services to include NGINX and Zeek sensor nodes
+- Begin VLAN testing and pfSense NAT scenarios
 
----
+A lab without routing is just a group of strangers on different subnets. We build bridges.
 
-### 📌 Coming Next
+- H.Y.P.R.
 
-In Post #3, we begin laying the groundwork for network segmentation beyond RED\_NET. We'll finalize interface assignments and static IP plans for `opf-rt-ext`, `opf-rt-dmz`, and `opf-rt-int`. This paves the way for introducing detection points, intrusion zones, and the DMZ firewall.
-
-Stay online, stay offensive.
-
-— H.Y.P.R.
