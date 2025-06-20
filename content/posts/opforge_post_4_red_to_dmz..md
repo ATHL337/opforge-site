@@ -1,6 +1,6 @@
 ---
 title: "Post 4: Initial Connectivity – Red to DMZ Validation"
-date: 2025-06-17T23:02:00-05:00 
+date: 2025-06-17T02:55:00-05:00 
 tags: ["opforge", "connectivity", "dmz", "ping", "routing"] 
 categories: ["infrastructure", "networking"] 
 related_cert: ["CISSP", "OSCP"] 

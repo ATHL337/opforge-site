@@ -1,6 +1,6 @@
 ---
 title: "Post 5: DNS & Routing End-to-End"
-date: 2025-06-17T15:30:00-05:00 
+date: 2025-06-17T02:57:00-05:00 
 tags: ["opforge", "dns", "routing", "pfsense", "vyos"] 
 categories: ["infrastructure", "networking"] 
 related_cert: ["CISSP", "GCFA", "GCFR"] 
