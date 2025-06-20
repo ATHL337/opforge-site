@@ -13,7 +13,13 @@
 &lt;li>&lt;strong>DMZ_NET&lt;/strong> (Public-facing infrastructure simulation)&lt;/li>
 &lt;li>&lt;strong>InternetSim&lt;/strong> (Outbound internet access)&lt;/li>
 &lt;/ul>
-&lt;p>The challenge was building &lt;strong>a realistic trust boundary&lt;/strong> enforced by routers and firewalls—while ensuring systems could still route, resolve, and log across appropriate zones.&lt;/p></description></item><item><title>OPFORGE Post 4: Routing from RED NET to DMZ Confirmed</title><link>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</guid><description>&lt;p>&lt;em>&amp;ldquo;Firewalls and routers don’t stop threats—discipline and traceability do.&amp;rdquo;&lt;/em>&lt;/p>
+&lt;p>The challenge was building &lt;strong>a realistic trust boundary&lt;/strong> enforced by routers and firewalls—while ensuring systems could still route, resolve, and log across appropriate zones.&lt;/p></description></item><item><title>Post 5: DNS &amp; Routing End-to-End</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Tue, 17 Jun 2025 15:30:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;If you know the way broadly, you will see it in all things.&amp;rdquo; — Miyamoto Musashi&lt;/p>&lt;/blockquote>
+&lt;h1 id="-dns--routing-end-to-end">✨ DNS &amp;amp; Routing End-to-End&lt;/h1>
+&lt;p>This post captures the initial end-to-end routing and DNS resolution across segmented subnets in the OPFORGE lab. It enabled reliable communication across infrastructure zones and laid the groundwork for centralized visibility and detection.&lt;/p>
+&lt;hr>
+&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
+&lt;p>&lt;strong>Problem:&lt;/strong> The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.&lt;/p></description></item><item><title>OPFORGE Post 4: Routing from RED NET to DMZ Confirmed</title><link>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/opforge_post_4_red_to_dmz./</guid><description>&lt;p>&lt;em>&amp;ldquo;Firewalls and routers don’t stop threats—discipline and traceability do.&amp;rdquo;&lt;/em>&lt;/p>
 &lt;h3 id="-objective">✅ Objective&lt;/h3>
 &lt;p>Ensure full routed communication path from &lt;code>opf-rt-red (192.168.10.1)&lt;/code> to &lt;code>opf-fw-dmz (pfSense, 192.168.21.2)&lt;/code> through:&lt;/p>
 &lt;pre tabindex="0">&lt;code>opf-rt-red → opf-rt-inet → opf-rt-ext → opf-fw-dmz
@@ -155,13 +161,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>exit
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
 &lt;h2 id="-3-opf-lnx01-or-red-network-host">🧪 3. &lt;code>opf-lnx01&lt;/code> or Red Network Host&lt;/h2>
-&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item><item><title>Post 5: DNS &amp; Routing End-to-End</title><link>https://opforge.dev/posts/opforge_post_5_dns_route/</link><pubDate>Sat, 31 May 2025 15:30:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_5_dns_route/</guid><description>&lt;blockquote>
-&lt;p>&amp;ldquo;If you know the way broadly, you will see it in all things.&amp;rdquo; — Miyamoto Musashi&lt;/p>&lt;/blockquote>
-&lt;h1 id="-dns--routing-end-to-end">✨ DNS &amp;amp; Routing End-to-End&lt;/h1>
-&lt;p>This post captures the initial end-to-end routing and DNS resolution across segmented subnets in the OPFORGE lab. It enabled reliable communication across infrastructure zones and laid the groundwork for centralized visibility and detection.&lt;/p>
-&lt;hr>
-&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
-&lt;p>&lt;strong>Problem:&lt;/strong> The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
+&lt;p>Ensure the following are configured on your RED_NET endpoints:&lt;/p></description></item><item><title>OPFORGE Rebrand Checklist for Mimikatz</title><link>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-05-31-opforge_rebrand_checklist/</guid><description>&lt;h1 id="opforge-rebrand-checklist-for-mimikatz">OPFORGE Rebrand Checklist for Mimikatz&lt;/h1>
 &lt;p>&lt;em>This step-by-step guide simplifies the process of rebranding Mimikatz under the OPFORGE project. Use it to create a portfolio-grade build aligned with Threat Emulation, Detection Engineering, and Explainable AI objectives.&lt;/em>&lt;/p>
 &lt;p>&lt;strong>Maintainer&lt;/strong>: Alfredo Pelaez&lt;br>
 &lt;strong>Date&lt;/strong>: 2025-05-31&lt;br>
