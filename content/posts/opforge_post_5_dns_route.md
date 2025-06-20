@@ -1,74 +1,110 @@
 ---
-title: "Post 5: End-to-End Routing from RED_NET to INTERNAL_NET" 
-date: 2025-06-17 
-tags: ["opforge", "routing", "dns", "network-debug", "segmentation"] 
-categories: ["infrastructure", "redteam", "blueteam"] 
-related_cert: ["GCIA", "GCFA", "GCIH"] 
-tooling: ["vyos", "pfsense", "vmware", "windows", "linux"] 
-artifact_type: ["lab_log", "troubleshooting_notes"]
+title: "Post 5: DNS & Routing End-to-End"
+date: 2025-05-31T15:30:00-05:00 
+tags: ["opforge", "dns", "routing", "pfsense", "vyos"] 
+categories: ["infrastructure", "networking"] 
+related_cert: ["CISSP", "GCFA", "GCFR"] 
+tooling: ["vyos", "pfsense", "elastic"] 
+artifact_type: ["lab_log", "design_note"]
 ---
 
-> "The network is like a novel. Every route a sentence, every packet a word, and every dropped reply a plot twist." — Unknown
+> "If you know the way broadly, you will see it in all things." — Miyamoto Musashi
 
-## 🧠 Summary
+# ✨ DNS & Routing End-to-End
 
-This milestone focused on resolving the final stretch of segmented routing in OPFORGE: achieving stable, validated connectivity from the RED\_NET enclave to hosts inside INTERNAL\_NET. After prior success establishing DMZ reachability from RED\_NET, we diagnosed and corrected final edge-case routing issues.
+This post captures the initial end-to-end routing and DNS resolution across segmented subnets in the OPFORGE lab. It enabled reliable communication across infrastructure zones and laid the groundwork for centralized visibility and detection.
 
-## ✅ Key Achievements
+---
 
-- 🔄 **All routers (opf-rt-\*) and pfSense firewall configured with consistent, valid static routes**
-- 📈 **ICMP and traceroute tests confirmed full reachability from RED\_NET to INTERNAL\_NET**
-- 🔧 **Corrected misleading or missing gateway definitions in pfSense and VyOS routers**
-- 🖥️ **Validated that Windows host **`OPF-DC01`** inside INTERNAL\_NET can reach gateway and nearby routers**
+## 📌 Abstract
 
-## 🧩 Network Topology Recap
+**Problem:** The initial network configuration lacked reliable inter-segment routing and DNS resolution, limiting endpoint communication and visibility into host activity.
 
-All devices now adhere to the segmented routing plan defined in [Post 4](opforge_post_4_routing_rednet_dmz.md). This includes rhymed IP subnets for traceability:
+**Approach:** Implement static routing across VyOS nodes and configure pfSense to serve DNS using its resolver. Validate communication paths from RED to DMZ to Internal zones.
 
+**Alignment:** Reinforces certification knowledge: CISSP (Network Architecture), GCFA (Log Source Centralization), GCFR (Infrastructure Mapping).
+
+**Outcome:** Endpoints now resolve domain names and reach targets across segments. Routing and DNS now mirror realistic enterprise networks.
+
+---
+
+## 📚 Prerequisites
+
+- `opf-fw-dmz` deployed with pfSense 2.7.2
+- VyOS routers (`opf-rt-red`, `opf-rt-inet`, `opf-rt-ext`, `opf-rt-int`) in position
+- VMs attached to appropriate VMnet subnets
+- Base interfaces and IPs assigned (see Post 4)
+
+---
+
+## ✅ Tasks This Phase
+
+- Set static routes on each VyOS router to reach adjacent zones
+- Configure pfSense DNS Resolver to serve 192.168.x.x/24 ranges
+- Test DNS resolution from RED, DMZ, and INT zones
+- Validate TCP reachability (e.g., ping, curl, etc.) across routed hops
+
+---
+
+## 🔧 Configuration Summary
+
+### VyOS (opf-rt-red)
+
+```bash
+configure
+set protocols static route 192.168.30.0/24 next-hop 192.168.20.2
+commit ; save
 ```
-RED_NET     -> 192.168.10.0/24
-INET Transit-> 192.168.20.0/24
-EXT Transit -> 192.168.30.0/24
-DMZ Transit -> 192.168.40.0/24
-DMZ ↔ INT    -> 192.168.50.0/24
-INTERNAL_NET-> 192.168.60.0/24
+
+### VyOS (opf-rt-inet)
+
+```bash
+configure
+set protocols static route 192.168.10.0/24 next-hop 192.168.20.1
+set protocols static route 192.168.50.0/24 next-hop 192.168.30.2
+commit ; save
 ```
 
-Latest route tests confirm all hops traverse this path cleanly:
+### VyOS (opf-rt-ext)
 
-```
-opf-lnx01 (10.10)
--> opf-rt-red (10.1/20.1)
---> opf-rt-inet (20.2/30.1)
----> opf-rt-ext (30.2/40.1)
-----> opf-fw-dmz (40.2/50.1)
------> opf-rt-int (50.2/60.1)
-------> INTERNAL_NET endpoint (60.100)
+```bash
+configure
+set protocols static route 192.168.60.0/24 next-hop 192.168.50.1
+commit ; save
 ```
 
-## 🔍 Observed Issues and Fixes
+### VyOS (opf-rt-int)
 
-| Problem                                                                | Resolution                                                                            |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 🔁 TTL exceeded on pings from RED\_NET to INTERNAL\_NET                | Static route from pfSense to 192.168.60.0/24 was missing or mispointed                |
-| 🔀 `opf-rt-red` routing table contained incorrect or duplicate entries | Cleaned up conflicting default routes; committed properly                             |
-| ❌ `OPF-DC01` could not reach 192.168.50.1                              | Likely blocked by pfSense rules; access verified via traceroute and validated routing |
+```bash
+configure
+set protocols static route 192.168.30.0/24 next-hop 192.168.50.2
+commit ; save
+```
 
-## 🗂️ Artifacts Created
+### pfSense (opf-fw-dmz)
 
-- Static routes defined on all VyOS routers and pfSense via `/etc/rc.conf.local`
-- Screenshots of `ping`, `traceroute`, and `route -v` outputs
-- Updated diagram and ASCII network maps in previous post
+- DNS Resolver: Enabled
+- Network Interfaces: LAN, WAN
+- Domain Overrides: none (using root hints)
+- Firewall Rules: Allow port 53 UDP from internal zones
 
-## 🚧 Next Steps: DNS Enablement & Resolver Strategy
+---
 
-The next evolution in the OPFORGE network will enable:
+## 🌟 Key Takeaways
 
-- DNS query resolution for all enclaves (RED, DMZ, INT)
-- Integration of local domain resolution via `OPF-DC01`
-- Optional DNS forwarding through pfSense or VyOS to upstream (Cloudflare or Google)
-- Visibility and detection alignment using DNS logs
+- Routing across multiple VyOS nodes provides granular control of east-west and north-south traffic
+- pfSense's DNS Resolver simplifies internal name resolution and supports visibility tools like Zeek and Suricata
+- Proper route planning avoids asymmetric routing and visibility blind spots
 
-> **Coming Next:** Post 6 will focus on DNS Resolver & Forwarder Architecture for OPFORGE, establishing end-to-end name resolution that supports emulation tooling, updates, and domain-aware logging.
+---
 
-We will also begin to examine how DNS telemetry feeds detection pipelines in enterprise environments.
+## 🛍 On Deck
+
+- Migrate to VLAN tagging for trunked segments
+- Introduce Zeek and ELK for traffic analysis
+- Begin integrating endpoint logging with Winlogbeat
+
+The OPFORGE lab continues to evolve into a trusted, validated cyber operations training ground where every emulation leaves a detection trail—by design.
+
+- H.Y.P.R.
+
