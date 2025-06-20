@@ -1,87 +1,90 @@
 ---
-title: "OPFORGE Post 4: Routing from RED\_NET to DMZ Confirmed" 
-date: 2025-06-17 
-tags: ["opforge", "routing", "firewall", "validation", "post-4"] 
-categories: ["infrastructure", "redteam", "segmentation"] 
-related_cert: ["OSCP", "GREM", "GPEN"] 
-tooling: ["vyos", "pfsense", "vmware"] 
-artifact_type: ["routing_config", "pfSense_rules", "verification_notes"]
+title: "Post 4: Initial Connectivity – Red to DMZ Validation"
+date: 2025-06-17T23:02:00-05:00 
+tags: ["opforge", "connectivity", "dmz", "ping", "routing"] 
+categories: ["infrastructure", "networking"] 
+related_cert: ["CISSP", "OSCP"] 
+tooling: ["vyos", "vmware"] 
+artifact_type: ["checkpoint", "sanity_test"]
 ---
 
-_"Firewalls and routers don’t stop threats—discipline and traceability do."_
+> "In the midst of chaos, there is also opportunity." — Sun Tzu
 
-### ✅ Objective
+# ✨ Initial Connectivity – Red to DMZ Validation
 
-Ensure full routed communication path from `opf-rt-red (192.168.10.1)` to `opf-fw-dmz (pfSense, 192.168.21.2)` through\:
+This post captures the preliminary test to confirm routed communication between the Red Team subnet and the DMZ prior to full lab routing. It served as a necessary checkpoint to ensure that the segmented network was behaving as expected before DNS, NAT, and VLAN tagging were added.
 
+---
+
+## 📌 Abstract
+
+**Problem:** With the new segmented topology in OPFORGE, we needed to verify that basic IP connectivity from RED → DMZ was functional before layering on DNS and full routing.
+
+**Approach:** Use ICMP (ping), static routes, and interface-level validation to confirm reachability between `opf-rt-red` and `opf-fw-dmz`.
+
+**Certifications Link:** Supports CISSP domain on network architecture validation and OSCP red team tradecraft (initial foothold testing).
+
+**Outcome:** Red Team subnet confirmed to route to DMZ. Config validated and paved the way for full DNS and NAT implementation (see Post 5).
+
+---
+
+## 📚 Prerequisites
+
+- VyOS routers `opf-rt-red`, `opf-rt-inet` in place with basic IP addressing
+- pfSense (`opf-fw-dmz`) online and reachable
+- Interfaces assigned to VMnets:
+  - RED\_NET (192.168.10.0/24)
+  - DMZ\_NET (192.168.50.0/24)
+- Static IPs assigned, firewall rules open for ICMP
+
+---
+
+## ✅ Tasks This Phase
+
+- Validate IP configuration on `opf-rt-red`, `opf-rt-inet`, and `opf-fw-dmz`
+- Add temporary static routes to allow RED → DMZ traversal
+- Test ICMP traffic (ping) from RED subnet VM to DMZ interface
+- Document any asymmetrical behavior or drop conditions
+
+---
+
+## 🔧 Configuration & Validation
+
+### Temporary VyOS Static Route (opf-rt-red)
+
+```bash
+configure
+set protocols static route 192.168.50.0/24 next-hop 192.168.20.2
+commit ; save
 ```
-opf-rt-red → opf-rt-inet → opf-rt-ext → opf-fw-dmz
+
+### Firewall Rule (pfSense – DMZ)
+
+- Allow ICMP (IPv4) from 192.168.10.0/24 to 192.168.50.1
+
+### Test
+
+```bash
+ping 192.168.50.1
 ```
 
 ---
 
-### 🧭 Summary of Actions Since Post #3
+## 🌟 Key Takeaways
 
-#### 🔧 Interface Corrections
-
-- Verified that `opf-rt-ext eth1` had correct IP `192.168.21.1/24`
-- Corrected VMnet assignment for `opf-rt-ext` and `opf-fw-dmz` to share same virtual switch (e.g., VMnet3)
-- Validated Layer 2 reachability using `arp -an` and ping
-
-#### 📦 Routing Configuration
-
-- On `opf-rt-red`: Static route to `192.168.22.0/24` via `192.168.10.2`
-- On `opf-rt-inet`: Routes to `192.168.21.0/24` and `192.168.22.0/24` via `192.168.22.2`
-- On `opf-rt-ext`: Forwarded DMZ-bound traffic to `192.168.21.2`
-- On `opf-fw-dmz`: Static route to `192.168.10.0/24` via `192.168.21.1`
-  - Added to `/etc/rc.conf.local` for persistence
-
-#### 🔐 Firewall Configuration
-
-- pfSense WAN interface rule added:
-  - **Allow ICMP from any to any** on WAN
-  - Confirmed ICMP echo replies work from `opf-rt-red`
+- Early connectivity testing prevents deeper troubleshooting pain later
+- Small-scope tests build confidence before introducing NAT, DNS, or VLANs
+- Observed ICMP traffic confirmed routes and firewall rules were properly aligned
 
 ---
 
-### 🧪 Test Results
+## 🧭 On Deck
 
-- `ping 192.168.21.2` from `opf-rt-red`: ✅ Success
-- Traceroute confirmed routed path through `opf-rt-inet` and `opf-rt-ext`
-- ARP and ICMP traffic verified using `tcpdump` and manual ARP queries
+- Expand from single hop routing to full RED → INT reachability
+- Implement DNS Resolver and verify name resolution across segments (see Post 5)
+- Migrate to tagged VLAN segmentation to reflect enterprise-grade architecture
 
----
+Every solid build starts with a solid handshake. One ping at a time.
 
-### 📘 Lessons Captured
-
-| Lesson                       | Description                                                                                               |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 🔌 VMnet Isolation           | Misaligned virtual NICs caused unreachable ARP/NIC comms — VM topology must be tightly controlled         |
-| 🔁 Static Routing Discipline | Each router must explicitly know how to reach at least one hop forward and one hop back                   |
-| 🧱 pfSense Default Behavior  | ICMP and interzone traffic blocked unless explicitly allowed — must add rules even for internal sim zones |
-| 🔄 Route Persistence         | For pfSense, `/etc/rc.conf.local` controls static route persistence (not `/etc/rc.conf` directly)         |
-
----
-
-### 📦 Artifacts Captured
-
-- `opf-fw-dmz` route config: `/etc/rc.conf.local`
-- `opf-rt-*` route configs: CLI command history + saved config tree
-- Screenshot archive: ICMP and routing confirmation
-
----
-
-### 📌 Coming Next
-
-In Post #5, we’ll break down the OPFORGE project using PMP principles:
-
-- Define milestones and work packages
-- Map each certification to artifacts and sprint goals
-- Begin sprint tracking in GitLab to capture ongoing execution
-
-This checkpoint locks in the RED → DMZ routing success as the operational foundation for both threat emulation and blue team telemetry validation.
-
-Stay routed — stay dangerous.
-
-— H.Y.P.R.
+- H.Y.P.R.
 
