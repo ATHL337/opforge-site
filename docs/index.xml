@@ -1,4 +1,244 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Tue, 17 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Routing Plan: Rhymed Segmented Flow</title><link>https://opforge.dev/docs/opf_routing_segmented_rhymed/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf_routing_segmented_rhymed/</guid><description>&lt;h2 id="-goal">🎯 Goal&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>OPFORGE Docs on OPFORGE</title><link>https://opforge.dev/docs/</link><description>Recent content in OPFORGE Docs on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Thu, 19 Jun 2025 19:45:00 -0500</lastBuildDate><atom:link href="https://opforge.dev/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>OPFORGE Lab Companion Sheet</title><link>https://opforge.dev/docs/opforge_lab_sheet/</link><pubDate>Thu, 19 Jun 2025 19:45:00 -0500</pubDate><guid>https://opforge.dev/docs/opforge_lab_sheet/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;Luck is what happens when preparation meets opportunity.&amp;rdquo; — Seneca&lt;/p>&lt;/blockquote>
+&lt;h1 id="-opforge-lab-companion-sheet">🧭 OPFORGE Lab Companion Sheet&lt;/h1>
+&lt;p>This companion sheet is a quick-reference guide for building and navigating the OPFORGE segmented lab environment. It aligns with blog posts 1 through 7 and supports realistic threat emulation, detection validation, and cyber-AI experimentation.&lt;/p>
+&lt;hr>
+&lt;h2 id="-lab-zones--addressing">🧱 Lab Zones &amp;amp; Addressing&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Zone&lt;/th>
+&lt;th>CIDR&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Gateway&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>RED_NET&lt;/td>
+&lt;td>192.168.50.0/24&lt;/td>
+&lt;td>Offensive tools, implants, C2s&lt;/td>
+&lt;td>192.168.50.1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>INTERNAL_NET&lt;/td>
+&lt;td>192.168.60.0/24&lt;/td>
+&lt;td>Clients, Domain Controller, Blue Team infra&lt;/td>
+&lt;td>192.168.60.1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DMZ_NET&lt;/td>
+&lt;td>192.168.20.0/24&lt;/td>
+&lt;td>Public-facing services&lt;/td>
+&lt;td>192.168.20.1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>LAN_WORKSTATIONS&lt;/td>
+&lt;td>192.168.30.0/24&lt;/td>
+&lt;td>User workstations&lt;/td>
+&lt;td>192.168.30.1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>EXT_NET (Transit)&lt;/td>
+&lt;td>192.168.41.0/24&lt;/td>
+&lt;td>Between DMZ and InternetSim&lt;/td>
+&lt;td>192.168.41.1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>InternetSim&lt;/td>
+&lt;td>192.168.40.0/24&lt;/td>
+&lt;td>Simulated public Internet&lt;/td>
+&lt;td>192.168.40.1&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-core-systems">📦 Core Systems&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Hostname&lt;/th>
+&lt;th>Role&lt;/th>
+&lt;th>IP Address&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>OPF-DC01&lt;/td>
+&lt;td>Windows AD/DNS Controller&lt;/td>
+&lt;td>192.168.60.5&lt;/td>
+&lt;td>Authoritative for opforge.local&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-FW-DMZ&lt;/td>
+&lt;td>pfSense Firewall&lt;/td>
+&lt;td>192.168.20.5&lt;/td>
+&lt;td>Routes/filters between DMZ + EXT_NET&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-RT-RED&lt;/td>
+&lt;td>VyOS Router for RED_NET&lt;/td>
+&lt;td>192.168.50.1&lt;/td>
+&lt;td>Static route → EXT_NET via 192.168.50.2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-RT-EXT&lt;/td>
+&lt;td>VyOS Router between DMZ &amp;amp; RED&lt;/td>
+&lt;td>192.168.20.2&lt;/td>
+&lt;td>Dual NIC on DMZ + EXT&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-RT-INET&lt;/td>
+&lt;td>VyOS Router for simulated Internet&lt;/td>
+&lt;td>192.168.40.1&lt;/td>
+&lt;td>Outbound only&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-RT-INT&lt;/td>
+&lt;td>VyOS Router for Internal Network&lt;/td>
+&lt;td>192.168.60.1&lt;/td>
+&lt;td>Connected to Domain + workstations&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OPF-RT-DMZ&lt;/td>
+&lt;td>Trunk router with VLAN 41&lt;/td>
+&lt;td>192.168.41.2&lt;/td>
+&lt;td>Connected to pfSense DMZ transit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-dns-role-assignment">📡 DNS Role Assignment&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Device&lt;/th>
+&lt;th>Interface Role&lt;/th>
+&lt;th>Primary DNS&lt;/th>
+&lt;th>Fallback DNS&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;td>Internal network&lt;/td>
+&lt;td>192.168.60.5&lt;/td>
+&lt;td>1.1.1.1, 8.8.8.8&lt;/td>
+&lt;td>Uses AD DNS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;td>Internet gateway&lt;/td>
+&lt;td>1.1.1.1&lt;/td>
+&lt;td>8.8.8.8&lt;/td>
+&lt;td>Strict external only&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;td>Red team network&lt;/td>
+&lt;td>192.168.50.1&lt;/td>
+&lt;td>1.1.1.1&lt;/td>
+&lt;td>pfSense for monitoring&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;td>External/DMZ router&lt;/td>
+&lt;td>192.168.50.1&lt;/td>
+&lt;td>1.1.1.1&lt;/td>
+&lt;td>No internal lookup&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;td>DMZ Firewall&lt;/td>
+&lt;td>1.1.1.1&lt;/td>
+&lt;td>8.8.8.8&lt;/td>
+&lt;td>Forwards to internal or external&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-firewall-rule-logic-pfsense">🔐 Firewall Rule Logic (pfSense)&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Allow&lt;/strong> DNS (TCP/UDP 53) from INTERNAL_NET to &lt;code>opf-dc01&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Allow&lt;/strong> ICMP selectively (ping, traceroute validation)&lt;/li>
+&lt;li>&lt;strong>Allow&lt;/strong> NTP (UDP 123)&lt;/li>
+&lt;li>&lt;strong>Allow&lt;/strong> HTTP/HTTPS only to specific zones&lt;/li>
+&lt;li>&lt;strong>Deny&lt;/strong> all else explicitly with logging&lt;/li>
+&lt;/ul>
+&lt;h2 id="-dns-resolver-config-pfsense">📑 DNS Resolver Config (pfSense)&lt;/h2>
+&lt;ul>
+&lt;li>Enabled DNS Resolver&lt;/li>
+&lt;li>Domain override: &lt;code>opforge.local&lt;/code> → &lt;code>192.168.60.5&lt;/code>&lt;/li>
+&lt;li>General DNS: &lt;code>1.1.1.1&lt;/code>, &lt;code>8.8.8.8&lt;/code>&lt;/li>
+&lt;li>Outgoing Interface: &lt;code>DMZ_TRANSIT_VLAN41&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="-vyos-routing-sample-per-router">🔄 VyOS Routing Sample (per router)&lt;/h2>
+&lt;pre tabindex="0">&lt;code class="language-vyos" data-lang="vyos">configure
+set protocols static route 192.168.30.0/24 next-hop 192.168.20.2
+set protocols static route 192.168.60.0/24 next-hop 192.168.30.1
+commit; save
+&lt;/code>&lt;/pre>&lt;h2 id="-validation-commands">🧪 Validation Commands&lt;/h2>
+&lt;h3 id="windows">Windows&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>ping opf-dc01
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nslookup google.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tracert opf-dc01.opforge.local
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="linux">Linux&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cat /etc/resolv.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ping opf-dc01.opforge.local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemd-resolve --status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-timeline-snapshot-posts-17">🗺 Timeline Snapshot (Posts 1–7)&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Post #&lt;/th>
+&lt;th>Milestone&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Lab Design + Purpose Defined&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Static Routing and Interfaces Set&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>Subnet Segmentation (Red, Blue, DMZ)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4&lt;/td>
+&lt;td>(Deprecated – merged into 5 &amp;amp; 7)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>5&lt;/td>
+&lt;td>DNS Resolver, Domain Controller Setup&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>6&lt;/td>
+&lt;td>Cross-zone DNS + Routing Fully Validated&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>7&lt;/td>
+&lt;td>VLAN 41 Added, pfSense Transit Config Completed&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="-tips--notes">🧠 Tips &amp;amp; Notes&lt;/h2>
+&lt;ul>
+&lt;li>Always snapshot before making routing/firewall changes&lt;/li>
+&lt;li>Use &lt;code>tcpdump&lt;/code> or &lt;code>Packet Capture&lt;/code> in pfSense for flow debugging&lt;/li>
+&lt;li>Keep &lt;code>/etc/hosts&lt;/code> clean and prefer DNS testing via resolvers&lt;/li>
+&lt;li>Maintain NAT boundaries only where necessary (egress control)&lt;/li>
+&lt;/ul>
+&lt;h2 id="-next-companion-add-ons">🧩 Next Companion Add-ons&lt;/h2>
+&lt;ul>
+&lt;li>Network diagram (SVG/PNG)&lt;/li>
+&lt;li>Credential vault structure (how secrets are handled)&lt;/li>
+&lt;li>Integration plans for Zeek and detection engines&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>Stay methodical. Document everything. Grow forward.&lt;/p></description></item><item><title>OPFORGE Routing Plan: Rhymed Segmented Flow</title><link>https://opforge.dev/docs/opf_routing_segmented_rhymed/</link><pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/docs/opf_routing_segmented_rhymed/</guid><description>&lt;h2 id="-goal">🎯 Goal&lt;/h2>
 &lt;p>Enforce logical traffic flow through each security zone in OPFORGE using a clearly segmented and rhymed IP scheme.&lt;/p>
 &lt;pre tabindex="0">&lt;code>RED_NET → RTR_RED → RTR_INET → RTR_EXT → FW_DMZ → RTR_INT → INTERNAL_NET
 &lt;/code>&lt;/pre>&lt;hr>
