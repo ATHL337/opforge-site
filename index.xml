@@ -169,7 +169,13 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To persist:&lt;/p></description></item><item><title>Post 2: Routing the OPFORGE Lab</title><link>https://opforge.dev/posts/opforge_post_2_routing/</link><pubDate>Mon, 16 Jun 2025 14:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_2_routing/</guid><description>&lt;blockquote>
 &lt;p>&amp;ldquo;You must understand the whole of life, not just one little part of it. That is why you must read, look at the skies, sing, and dance.&amp;rdquo; — Jiddu Krishnamurti&lt;/p>&lt;/blockquote>
 &lt;h1 id="-routing-the-opforge-lab">🧠 Routing the OPFORGE Lab&lt;/h1>
-&lt;p>This post outlines the implementation of static routing across segmented subnets in the OPFORGE lab using VyOS routers. With a baseline topology now established, we focus on connecting RED, INT, and DMZ zones through transit routers and validating initial east-west communication.&lt;/p></description></item><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;h1 id="-about-opforge">🔧 About OPFORGE&lt;/h1>
+&lt;p>This post outlines the implementation of static routing across segmented subnets in the OPFORGE lab using VyOS routers. With a baseline topology now established, we focus on connecting RED, INT, and DMZ zones through transit routers and validating initial east-west communication.&lt;/p></description></item><item><title>Post 1: Genesis of OPFORGE</title><link>https://opforge.dev/posts/opforge_post_1_genesis/</link><pubDate>Mon, 16 Jun 2025 08:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_1_genesis/</guid><description>&lt;blockquote>
+&lt;p>&amp;ldquo;First say to yourself what you would be; and then do what you have to do.&amp;rdquo; — Epictetus&lt;/p>&lt;/blockquote>
+&lt;h1 id="-genesis-of-opforge">🚀 Genesis of OPFORGE&lt;/h1>
+&lt;p>The launch of OPFORGE marks the deliberate beginning of a long-range effort to build a portfolio-driven, enterprise-grade cyber operations lab. This post documents the rationale, guiding principles, and initial actions to set up the OPFORGE lab environment using VMware Workstation Pro.&lt;/p>
+&lt;hr>
+&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
+&lt;p>&lt;strong>Problem Statement:&lt;/strong> Many cyber professionals lack a personalized, practical testbed to validate tools, emulate adversaries, and showcase capabilities. OPFORGE fills that gap through structured lab design.&lt;/p></description></item><item><title>About OPFORGE</title><link>https://opforge.dev/about/</link><pubDate>Mon, 16 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/about/</guid><description>&lt;h1 id="-about-opforge">🔧 About OPFORGE&lt;/h1>
 &lt;p>&lt;strong>OPFORGE&lt;/strong> is a purpose-built, full-spectrum cyber operations lab designed to fuse red team emulation, blue team detection, and AI/ML integration into a living portfolio of validated cybersecurity capabilities.&lt;/p>
 &lt;p>Originally created as a threat emulation testbed, OPFORGE has evolved into a scalable platform for demonstrating hands-on technical depth across disciplines—anchored to certifications, graduate-level research, and operational experience.&lt;/p>
 &lt;hr>
@@ -615,10 +621,4 @@
 &lt;li>&lt;strong>Purpose&lt;/strong>: Golden template for domain-joined endpoint clones (&lt;code>opf-mbr01&lt;/code>, future victim hosts)&lt;/li>
 &lt;/ul>
 &lt;h2 id="-tool-installation-via-script">📦 Tool Installation via Script&lt;/h2>
-&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item><item><title>Post 1: Genesis of OPFORGE</title><link>https://opforge.dev/posts/opforge_post_1_genesis/</link><pubDate>Fri, 16 May 2025 08:00:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_1_genesis/</guid><description>&lt;blockquote>
-&lt;p>&amp;ldquo;First say to yourself what you would be; and then do what you have to do.&amp;rdquo; — Epictetus&lt;/p>&lt;/blockquote>
-&lt;h1 id="-genesis-of-opforge">🚀 Genesis of OPFORGE&lt;/h1>
-&lt;p>The launch of OPFORGE marks the deliberate beginning of a long-range effort to build a portfolio-driven, enterprise-grade cyber operations lab. This post documents the rationale, guiding principles, and initial actions to set up the OPFORGE lab environment using VMware Workstation Pro.&lt;/p>
-&lt;hr>
-&lt;h2 id="-abstract">📌 Abstract&lt;/h2>
-&lt;p>&lt;strong>Problem Statement:&lt;/strong> Many cyber professionals lack a personalized, practical testbed to validate tools, emulate adversaries, and showcase capabilities. OPFORGE fills that gap through structured lab design.&lt;/p></description></item></channel></rss>
+&lt;p>After installation and patching, the following tools were installed using the custom script:&lt;/p></description></item></channel></rss>
