@@ -1,4 +1,120 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Thu, 19 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Post 6: DNS and Routing Lock-in across OPFORGE Zones</title><link>https://opforge.dev/posts/2025-06-19-post-6-routing-dns-success/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-06-19-post-6-routing-dns-success/</guid><description>&lt;h1 id="-phase-summary">✅ Phase Summary&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Latest Posts from the OPFORGE Project on OPFORGE</title><link>https://opforge.dev/</link><description>Recent content in Latest Posts from the OPFORGE Project on OPFORGE</description><image><title>OPFORGE</title><url>https://opforge.dev/preview.png</url><link>https://opforge.dev/preview.png</link></image><generator>Hugo -- 0.147.0</generator><language>en-us</language><lastBuildDate>Thu, 19 Jun 2025 20:15:00 -0500</lastBuildDate><atom:link href="https://opforge.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Post 7: VLAN Foundations and DMZ Segmentation</title><link>https://opforge.dev/posts/opforge_post_7_vlan_segmentation/</link><pubDate>Thu, 19 Jun 2025 20:15:00 -0500</pubDate><guid>https://opforge.dev/posts/opforge_post_7_vlan_segmentation/</guid><description>&lt;h1 id="-vlan-testing-and-future-segmentation">🧱 VLAN Testing and Future Segmentation&lt;/h1>
+&lt;p>This phase introduces tagged VLAN interfaces between &lt;code>opf-fw-dmz&lt;/code> and &lt;code>opf-rt-ext&lt;/code>, laying groundwork for 802.1Q segmentation in the OPFORGE lab. We use VMware virtual switches to simulate VLAN isolation and test intra-zone controls before extending tagging to endpoints.&lt;/p>
+&lt;hr>
+&lt;h2 id="-current-ip-assignments">🛠️ Current IP Assignments&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Device&lt;/th>
+&lt;th>Interface&lt;/th>
+&lt;th>IP Address&lt;/th>
+&lt;th>Connected To&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.10.1/24&lt;/td>
+&lt;td>RED_NET&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.20.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.20.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-red&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.30.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.30.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-inet&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1.41&lt;/code>&lt;/td>
+&lt;td>192.168.41.1/24&lt;/td>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code> (em0.41)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;td>&lt;code>em0.41&lt;/code>&lt;/td>
+&lt;td>192.168.41.2/24&lt;/td>
+&lt;td>&lt;code>opf-rt-ext&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;td>&lt;code>em1&lt;/code>&lt;/td>
+&lt;td>192.168.50.1/24&lt;/td>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth0&lt;/code>&lt;/td>
+&lt;td>192.168.50.2/24&lt;/td>
+&lt;td>&lt;code>opf-fw-dmz&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>opf-rt-int&lt;/code>&lt;/td>
+&lt;td>&lt;code>eth1&lt;/code>&lt;/td>
+&lt;td>192.168.60.1/24&lt;/td>
+&lt;td>INTERNAL_NET&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h2 id="-updated-configuration-and-migration-steps">🔧 Updated Configuration and Migration Steps&lt;/h2>
+&lt;h3 id="pfsense-vlan-adjustments">pfSense VLAN Adjustments&lt;/h3>
+&lt;ul>
+&lt;li>Created VLAN &lt;code>DMZ_TRANSIT_VLAN41&lt;/code> on parent &lt;code>em0&lt;/code>, tag &lt;code>41&lt;/code>&lt;/li>
+&lt;li>Assigned interface and enabled it with static IP &lt;code>192.168.41.2/24&lt;/code>&lt;/li>
+&lt;li>Set &lt;strong>EXT_VLAN41&lt;/strong> as the IPv4 upstream gateway under &lt;strong>Interfaces &amp;gt; DMZ_TRANSIT_VLAN41&lt;/strong>&lt;/li>
+&lt;li>In &lt;strong>System &amp;gt; Routing &amp;gt; Gateways&lt;/strong>, defined and set EXT_VLAN41 as default IPv4 gateway&lt;/li>
+&lt;li>Moved NAT and firewall rules from WAN to DMZ_TRANSIT_VLAN41&lt;/li>
+&lt;li>Updated &lt;strong>Firewall &amp;gt; NAT &amp;gt; Outbound&lt;/strong>:
+&lt;ul>
+&lt;li>Interface: &lt;code>DMZ_TRANSIT_VLAN41&lt;/code>&lt;/li>
+&lt;li>Source: &lt;code>192.168.41.0/24&lt;/code>&lt;/li>
+&lt;li>NAT Address: Interface Address&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Under &lt;strong>Services &amp;gt; DNS Resolver &amp;gt; General Settings&lt;/strong>:
+&lt;ul>
+&lt;li>Network Interfaces: WAN, LAN, DMZ_TRANSIT_VLAN41&lt;/li>
+&lt;li>Outgoing Interfaces: DMZ_TRANSIT_VLAN41&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Verified routes under &lt;strong>Diagnostics &amp;gt; Routes&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h3 id="vyos-opf-rt-ext">VyOS (opf-rt-ext)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>delete interfaces ethernet eth1 address 192.168.40.1/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth1 vif &lt;span style="color:#ae81ff">41&lt;/span> address 192.168.41.1/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set interfaces ethernet eth1 vif &lt;span style="color:#ae81ff">41&lt;/span> description &lt;span style="color:#e6db74">&amp;#39;DMZ_TRANSIT_VLAN41&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> outbound-interface eth1.41
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> source address 192.168.41.0/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set nat source rule &lt;span style="color:#ae81ff">100&lt;/span> translation address masquerade
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.50.0/24 next-hop 192.168.41.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.60.0/24 next-hop 192.168.41.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit ; save
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="vyos-opf-rt-inet">VyOS (opf-rt-inet)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>configure
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set protocols static route 192.168.41.0/24 next-hop 192.168.30.2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit ; save
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;p>This update ensures your VLAN41 transition doesn&amp;rsquo;t disrupt existing connectivity. You&amp;rsquo;ve successfully promoted 802.1Q tagging and enforced controlled segmentation—positioning OPFORGE for deeper detection and policy experiments.&lt;/p></description></item><item><title>Post 6: DNS and Routing Lock-in across OPFORGE Zones</title><link>https://opforge.dev/posts/2025-06-19-post-6-routing-dns-success/</link><pubDate>Thu, 19 Jun 2025 00:00:00 +0000</pubDate><guid>https://opforge.dev/posts/2025-06-19-post-6-routing-dns-success/</guid><description>&lt;h1 id="-phase-summary">✅ Phase Summary&lt;/h1>
 &lt;p>We’ve reached a critical milestone: stable &lt;strong>end-to-end routing and DNS resolution across all OPFORGE zones&lt;/strong>, including RED_NET, INTERNAL_NET, and DMZ. This post captures what it took to get there, the routing fixes, NAT updates, DNS handoffs, and the principle of least privilege in firewall policies.&lt;/p>
 &lt;hr>
 &lt;h2 id="-background">🧠 Background&lt;/h2>
