@@ -1,6 +1,6 @@
 ---
 title: "Post 8: Migrating to OpenSearch with Data Prepper for Log Ingestion"
-date: 2025-06-26T03:00:00-05:00 
+date: 2025-06-25T03:00:00-05:00 
 tags: ["opforge", "OpenSearch", "Data Prepper", "log_ingestion", "SIEM"]
 categories: ["log_ingestion", "detection_stack", "future_lab"]
 related_cert: ["CISSP", "OSCP", "GCFA", "GCFR", "GREM", "GXPN", "GPYC"]
